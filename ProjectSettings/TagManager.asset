@@ -38,8 +38,41 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Colliders
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: 'Mid Background / Far Background '
+    uniqueID: 2253763907
+    locked: 0
+  - name: Near Background
+    uniqueID: 1663800223
+    locked: 0
+  - name: Interactive Objects / Obstacles / Ground
+    uniqueID: 3141538935
+    locked: 0
+  - name: Player / Enemies
+    uniqueID: 996927747
+    locked: 0
+  - name: Gameplay Effects
+    uniqueID: 4089638255
+    locked: 0
+  - name: Foreground Gameplay
+    uniqueID: 2578356519
+    locked: 0
+  - name: Foreground Effects
+    uniqueID: 1521959651
+    locked: 0
+  - name: Game UI
+    uniqueID: 3087508843
+    locked: 0
+  - name: Main Menu / Pause Menu
+    uniqueID: 658165387
+    locked: 0
+  - name: Fade or Transition
+    uniqueID: 1810987765
+    locked: 0
+  - name: Screen Overlay
+    uniqueID: 39260339
     locked: 0
