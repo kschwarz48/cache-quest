@@ -29,7 +29,7 @@ public class DoorInteraction : MonoBehaviour, IInteractable
 
     void Update()
     {
-        if (isPlayerClose && Input.GetMouseButtonDown(0)) // 0 is for left click
+        if (isPlayerClose && Input.GetKeyDown(KeyCode.E)) 
         {
             Interact();
         }

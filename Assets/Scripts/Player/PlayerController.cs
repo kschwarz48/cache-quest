@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private bool isRolling = false;
+    private bool isAttacking = false;
     private float originalSpeed = 5f;
     public float rollSpeedMultiplier = 1.5f;
     public float rollDuration = 0.34f;
@@ -59,6 +60,22 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Roll());
         }
 
+        if (Input.GetMouseButtonDown(0) && !isRolling && !isAttacking)  
+        {
+            StartCoroutine(Attack());
+        }
+    }
+
+    private IEnumerator Attack()
+    { 
+        isAttacking = true;
+        animator.SetBool("isAttacking", true);
+
+        // Wait for the animation to finish
+        yield return new WaitForSeconds(0.5f);
+
+        animator.SetBool("isAttacking", false);
+        isAttacking = false;
     }
 
 
