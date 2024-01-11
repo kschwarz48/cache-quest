@@ -1,11 +1,15 @@
 using UnityEngine;
 using System.Collections;
 
-
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance;
 
+    public Collider2D attackHitboxUp;
+    public Collider2D attackHitboxDown;
+    public Collider2D attackHitboxLeft;
+    public Collider2D attackHitboxRight;
+    private Vector2 currentAttackDirection;
     public float moveSpeed = 5f;
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -33,6 +37,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        DisableAllHitboxes(); 
     }
 
     void Update()
@@ -71,11 +76,70 @@ public class PlayerController : MonoBehaviour
         isAttacking = true;
         animator.SetBool("isAttacking", true);
 
-        // Wait for the animation to finish
-        yield return new WaitForSeconds(0.5f);
+        currentAttackDirection = DetermineAttackDirection();
+        EnableCorrectHitbox(currentAttackDirection);
 
+        yield return new WaitForSeconds(0.5f); 
+
+        DisableAllHitboxes();
         animator.SetBool("isAttacking", false);
         isAttacking = false;
+    }
+
+    void EnableCorrectHitbox(Vector2 direction)
+    {
+        DisableAllHitboxes(); // First, disable all hitboxes
+
+        if (direction == Vector2.up && attackHitboxUp != null)
+        {
+            attackHitboxUp.enabled = true;
+        }
+        else if (direction == Vector2.down && attackHitboxDown != null)
+        {
+            attackHitboxDown.enabled = true;
+        }
+        else if (direction == Vector2.left && attackHitboxLeft != null)
+        {
+            attackHitboxLeft.enabled = true;
+        }
+        else if (direction == Vector2.right && attackHitboxRight != null)
+        {
+            attackHitboxRight.enabled = true;
+        }
+    }
+
+    void DisableAllHitboxes()
+    {
+        if (attackHitboxUp != null)
+            attackHitboxUp.enabled = false;
+        if (attackHitboxDown != null)
+            attackHitboxDown.enabled = false;
+        if (attackHitboxLeft != null)
+            attackHitboxLeft.enabled = false;
+        if (attackHitboxRight != null)
+            attackHitboxRight.enabled = false;
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!isAttacking) 
+        {
+            // Ignore collision as we're not attacking
+            return;
+        }
+
+        Debug.Log($"Hit: {collision.gameObject.name} with {currentAttackDirection} attack");
+
+        if (collision.CompareTag("Enemy"))
+        {
+            Debug.Log("Attacked an enemy!");
+            // Add logic to handle enemy collision here
+        }
+        else if (collision.CompareTag("Destructible"))
+        {
+            Debug.Log("Hit a destructible object!");
+            // Add logic to handle destructible object collision here
+        }
     }
 
 
@@ -86,7 +150,7 @@ public class PlayerController : MonoBehaviour
         animator.SetTrigger("RollNow");
         Debug.Log("RollNow trigger set. Original speed: " + moveSpeed);
 
-        moveSpeed *= rollSpeedMultiplier;  // Or directly use a hardcoded value for testing
+        moveSpeed *= rollSpeedMultiplier;  // Increase speed for rolling
         Debug.Log("After multiplication, speed: " + moveSpeed);
 
         yield return new WaitForSeconds(rollDuration);
@@ -96,11 +160,21 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Coroutine ended. Speed reset to: " + moveSpeed);
     }
 
-
     void FixedUpdate()
     {
-        Debug.Log("FixedUpdate: current speed: " + moveSpeed);
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 
+    private Vector2 DetermineAttackDirection()
+    {
+        // Determine the attack direction based on the player's current movement direction
+        if (Mathf.Abs(movement.x) > Mathf.Abs(movement.y))
+        {
+            return movement.x > 0 ? Vector2.right : Vector2.left;
+        }
+        else
+        {
+            return movement.y > 0 ? Vector2.up : Vector2.down;
+        }
+    }
 }
