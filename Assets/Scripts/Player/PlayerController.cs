@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private bool isRolling = false;
     private bool isAttacking = false;
     private float originalSpeed = 5f;
-    public float rollSpeedMultiplier = 1.5f;
+    public float rollSpeedMultiplier = 200f;
     public float rollDuration = 0.34f;
 
     void Awake()
@@ -81,22 +81,26 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Roll()
     {
-        Debug.Log("Coroutine started.");
+        Debug.Log("Coroutine started. rollSpeedMultiplier: " + rollSpeedMultiplier);
         isRolling = true;
         animator.SetTrigger("RollNow");
-        Debug.Log("RollNow trigger set.");
-        moveSpeed *= rollSpeedMultiplier;
+        Debug.Log("RollNow trigger set. Original speed: " + moveSpeed);
+
+        moveSpeed *= rollSpeedMultiplier;  // Or directly use a hardcoded value for testing
+        Debug.Log("After multiplication, speed: " + moveSpeed);
+
         yield return new WaitForSeconds(rollDuration);
 
         moveSpeed = originalSpeed;
         isRolling = false;
-        Debug.Log("Coroutine ended.");
+        Debug.Log("Coroutine ended. Speed reset to: " + moveSpeed);
     }
-
 
 
     void FixedUpdate()
     {
+        Debug.Log("FixedUpdate: current speed: " + moveSpeed);
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
+
 }
