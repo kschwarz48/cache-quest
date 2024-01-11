@@ -29,7 +29,7 @@ public class DoorInteraction : MonoBehaviour, IInteractable
 
     void Update()
     {
-        if (isPlayerClose && Input.GetKeyDown(KeyCode.E)) 
+        if (isPlayerClose && (Input.GetKeyDown(KeyCode.E)|| Input.GetMouseButtonDown(1)))
         {
             Interact();
         }

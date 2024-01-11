@@ -7,20 +7,72 @@ public class EnemyController : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movementDirection;
     private Animator animator;
+    private SpriteRenderer spriteRenderer;
     private bool isAttacking = false;
-    
-    public float patrolRadius = 2f; // The radius within which the enemy will patrol
+    private bool isReturning = false;
+
+    public float walkDistance = 2f; // The distance the enemy will walk before stopping
+    public float pauseDuration = 2f; // Time in seconds the enemy pauses before returning
     private Vector2 startPosition;
-    private float moveTimer;
-    private float directionChangeTime = 2f; // Time in seconds between direction changes
+    private Vector2 patrolPoint;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         startPosition = rb.position;
-        PickNewDirection();
+        StartCoroutine(Patrol());
+    }
+
+    // Patrol coroutine
+    private IEnumerator Patrol()
+    {
+        while (true)
+        {
+            // Choose a random direction
+            movementDirection = Random.insideUnitCircle.normalized;
+            patrolPoint = startPosition + movementDirection * walkDistance;
+            isReturning = false;
+
+            // Walk to the patrol point
+            while (!isReturning && (rb.position - patrolPoint).sqrMagnitude > 0.01f)
+            {
+                MoveTowards(patrolPoint);
+                yield return null;
+            }
+
+            // Pause for a bit
+            yield return new WaitForSeconds(pauseDuration);
+
+            // Return to start position
+            isReturning = true;
+            while ((rb.position - startPosition).sqrMagnitude > 0.01f)
+            {
+                MoveTowards(startPosition);
+                yield return null;
+            }
+
+            // Pause before choosing a new patrol point
+            yield return new WaitForSeconds(pauseDuration);
+        }
+    }
+
+    // Method to move towards a target position
+    private void MoveTowards(Vector2 targetPosition)
+    {
+        rb.MovePosition(Vector2.MoveTowards(rb.position, targetPosition, moveSpeed * Time.deltaTime));
+        FlipSprite(targetPosition - rb.position);
+    }
+
+    // Method to flip the sprite based on direction
+    private void FlipSprite(Vector2 direction)
+    {
+        if (direction.x < 0)
+            spriteRenderer.flipX = false; // Facing right
+        else if (direction.x > 0)
+            spriteRenderer.flipX = true; // Facing left
     }
 
     // Update is called once per frame
@@ -30,37 +82,6 @@ public class EnemyController : MonoBehaviour
         {
             StartCoroutine(Attack());
         }
-
-        // Update the movement timer and switch directions if it's time
-        moveTimer += Time.deltaTime;
-        if (moveTimer >= directionChangeTime)
-        {
-            PickNewDirection();
-        }
-    }
-
-    void FixedUpdate()
-    {
-        // If the enemy is too far from its start position, pick a new direction
-        if ((rb.position - startPosition).sqrMagnitude > patrolRadius * patrolRadius)
-        {
-            PickNewDirection();
-        }
-
-        // Move the enemy
-        rb.MovePosition(rb.position + movementDirection * moveSpeed * Time.fixedDeltaTime);
-    }
-
-    private void PickNewDirection()
-    {
-        moveTimer = 0f; // Reset the move timer
-
-        // Randomly pick a direction
-        float angle = Random.Range(0, 360) * Mathf.Deg2Rad;
-        movementDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
-
-        // Reset the direction change time randomly
-        directionChangeTime = Random.Range(1f, 3f); // Change direction every 1 to 3 seconds
     }
 
 
