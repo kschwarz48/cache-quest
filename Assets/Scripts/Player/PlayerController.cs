@@ -42,8 +42,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        if (!isRolling)  
+        {
+            movement.x = Input.GetAxisRaw("Horizontal");
+            movement.y = Input.GetAxisRaw("Vertical");
+        }
 
         // Flip the character's sprite based on movement direction
         if (movement.x > 0)
@@ -59,9 +62,9 @@ public class PlayerController : MonoBehaviour
         float simulatedSpeed = movement.sqrMagnitude > 0 ? 0.5f : 0f;
         animator.SetFloat("Speed", simulatedSpeed);
 
-        if (Input.GetKeyDown(KeyCode.Space) && !isRolling)
+        if (Input.GetKeyDown(KeyCode.Space) && !isRolling && movement != Vector2.zero)
         {
-            Debug.Log("Spacebar pressed and not rolling.");
+            Debug.Log("Spacebar pressed and not rolling or moving.");
             StartCoroutine(Roll());
         }
 
@@ -145,19 +148,21 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Roll()
     {
-        Debug.Log("Coroutine started. rollSpeedMultiplier: " + rollSpeedMultiplier);
+        Vector2 rollDirection = movement.normalized;  // Capture the current movement direction at the start of the roll
         isRolling = true;
         animator.SetTrigger("RollNow");
-        Debug.Log("RollNow trigger set. Original speed: " + moveSpeed);
 
-        moveSpeed *= rollSpeedMultiplier;  // Increase speed for rolling
-        Debug.Log("After multiplication, speed: " + moveSpeed);
+        moveSpeed *= rollSpeedMultiplier;
 
-        yield return new WaitForSeconds(rollDuration);
+        float rollEndTime = Time.time + rollDuration;
+        while (Time.time < rollEndTime)
+        {
+            rb.MovePosition(rb.position + rollDirection * moveSpeed * Time.fixedDeltaTime);
+            yield return null;  // Wait for the next frame
+        }
 
         moveSpeed = originalSpeed;
         isRolling = false;
-        Debug.Log("Coroutine ended. Speed reset to: " + moveSpeed);
     }
 
     void FixedUpdate()
