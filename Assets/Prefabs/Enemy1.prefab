@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -261660161941635458}
   - component: {fileID: 2725807798005127712}
   - component: {fileID: 529196507274349605}
+  - component: {fileID: 8611972225551818864}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Enemy
@@ -128,7 +129,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  patrolRadius: 2
+  walkDistance: 2
+  pauseDuration: 2
 --- !u!61 &2725807798005127712
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -219,3 +221,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32, y: 0.2777937}
   m_EdgeRadius: 0
+--- !u!114 &8611972225551818864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5919730884113555689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b18a2edefec0054daf08481ade49aa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 30

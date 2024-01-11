@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,9 +11,7 @@ public class PlayerController : MonoBehaviour
     public Collider2D attackHitboxLeft;
     public Collider2D attackHitboxRight;
     private Vector2 currentAttackDirection;
-
     private Vector2 lastMovementDirection;
-
     public float moveSpeed = 5f;
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -23,6 +22,11 @@ public class PlayerController : MonoBehaviour
     private float originalSpeed = 5f;
     public float rollSpeedMultiplier = 200f;
     public float rollDuration = 0.34f;
+    private float attackCooldown = 0.5f; // Cooldown duration in seconds
+    private float lastAttackTime; // Time of the last attack
+    private Collider2D currentAttackHitbox;
+    private HashSet<GameObject> hitEnemies;
+
 
     void Awake()
     {
@@ -77,30 +81,53 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(Roll());
         }
-
-        if (Input.GetMouseButtonDown(0) && !isRolling && !isAttacking)  
+        if (Input.GetMouseButtonDown(0) && !isRolling && !isAttacking && Time.time >= lastAttackTime + attackCooldown)  
         {
             StartCoroutine(Attack());
         }
     }
 
-
-
     private IEnumerator Attack()
     { 
         isAttacking = true;
+        lastAttackTime = Time.time;
+        hitEnemies = new HashSet<GameObject>(); // Initialize the set for this attack
         animator.SetBool("isAttacking", true);
 
         currentAttackDirection = DetermineAttackDirection();
-        EnableCorrectHitbox(currentAttackDirection);
+        currentAttackHitbox = GetAttackHitbox(currentAttackDirection);
+        EnableAttackHitbox();
 
         yield return new WaitForSeconds(0.5f); 
 
-        DisableAllHitboxes();
+        DisableAttackHitbox();
         animator.SetBool("isAttacking", false);
         isAttacking = false;
     }
 
+    private Collider2D GetAttackHitbox(Vector2 direction)
+    {
+        if (direction == Vector2.up)
+            return attackHitboxUp;
+        else if (direction == Vector2.down)
+            return attackHitboxDown;
+        else if (direction == Vector2.left)
+            return attackHitboxLeft;
+        else // assuming right direction
+            return attackHitboxRight;
+    }
+
+    public void EnableAttackHitbox()
+    {
+        if (currentAttackHitbox != null)
+            currentAttackHitbox.enabled = true;
+    }
+
+    public void DisableAttackHitbox()
+    {
+        if (currentAttackHitbox != null)
+            currentAttackHitbox.enabled = false;
+    }
     void EnableCorrectHitbox(Vector2 direction)
     {
         DisableAllHitboxes(); // First, disable all hitboxes
@@ -137,25 +164,29 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!isAttacking) 
+        if (!isAttacking) return;
+        Debug.Log($"Collision with: {collision.gameObject.name}");
+        if (collision.CompareTag("Enemy") && !hitEnemies.Contains(collision.gameObject))
         {
-            // Ignore collision as we're not attacking
-            return;
-        }
-
-        Debug.Log($"Hit: {collision.gameObject.name} with {currentAttackDirection} attack");
-
-        if (collision.CompareTag("Enemy"))
-        {
-            Debug.Log("Attacked an enemy!");
-            // Add logic to handle enemy collision here
+            EnemyHealth enemyHealth = collision.GetComponent<EnemyHealth>();
+            if (enemyHealth != null)
+            {
+                Debug.Log("Attacked an enemy and dealing damage!");
+                enemyHealth.TakeDamage(10);
+                hitEnemies.Add(collision.gameObject);
+            }
         }
         else if (collision.CompareTag("Destructible"))
         {
             Debug.Log("Hit a destructible object!");
-            // Add logic to handle destructible object collision here
+            DestructibleObjectHealth destructibleHealth = collision.GetComponent<DestructibleObjectHealth>();
+            if (destructibleHealth != null)
+            {
+                destructibleHealth.TakeDamage(10); // Adjust the damage value as needed
+            }
         }
     }
+
 
 
     private IEnumerator Roll()
@@ -181,6 +212,7 @@ public class PlayerController : MonoBehaviour
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
+
 
     private Vector2 DetermineAttackDirection()
     {

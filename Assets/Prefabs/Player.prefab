@@ -383,10 +383,10 @@ GameObject:
   - component: {fileID: 2944233632058076786}
   - component: {fileID: 8315795941495980583}
   - component: {fileID: 7040284863672805145}
-  - component: {fileID: 5293825981582064310}
   - component: {fileID: 4302982679281629661}
   - component: {fileID: 8960617043184888704}
   - component: {fileID: 636115330304164439}
+  - component: {fileID: 8154696398132020951}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -505,25 +505,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &5293825981582064310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8707608179069307163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04f4628661cb3e3438d3474f2f4e166c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackHitboxUp: {fileID: 4586660196466911500}
-  attackHitboxDown: {fileID: 6403243944604710624}
-  attackHitboxLeft: {fileID: 8318905774384880773}
-  attackHitboxRight: {fileID: 2481212519380433345}
-  moveSpeed: 5
-  rollSpeedMultiplier: 1.75
-  rollDuration: 0.34
 --- !u!61 &4302982679281629661
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -635,6 +616,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.757269, y: 0.66640615}
   m_EdgeRadius: 0
+--- !u!114 &8154696398132020951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8707608179069307163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04f4628661cb3e3438d3474f2f4e166c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackHitboxUp: {fileID: 4586660196466911500}
+  attackHitboxDown: {fileID: 6403243944604710624}
+  attackHitboxLeft: {fileID: 8318905774384880773}
+  attackHitboxRight: {fileID: 2481212519380433345}
+  moveSpeed: 5
+  rollSpeedMultiplier: 1.75
+  rollDuration: 0.34
 --- !u!1 &8733535228679508106
 GameObject:
   m_ObjectHideFlags: 0
