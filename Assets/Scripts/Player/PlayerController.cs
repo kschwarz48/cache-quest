@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
     public Collider2D attackHitboxLeft;
     public Collider2D attackHitboxRight;
     private Vector2 currentAttackDirection;
+
+    private Vector2 lastMovementDirection;
+
     public float moveSpeed = 5f;
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -37,34 +40,41 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        lastMovementDirection = Vector2.right; // Default direction, adjust as needed
         DisableAllHitboxes(); 
     }
 
     void Update()
     {
-        if (!isRolling)  
+        if (!isRolling)
         {
-            movement.x = Input.GetAxisRaw("Horizontal");
-            movement.y = Input.GetAxisRaw("Vertical");
+            Vector2 newMovement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+            // Always update the movement vector, but update lastMovementDirection only when there's movement
+            if (newMovement != Vector2.zero)
+            {
+                lastMovementDirection = newMovement.normalized; // Update the last movement direction
+            }
+            movement = newMovement;
+
+            // Flip the character's sprite based on movement direction
+            if (movement.x > 0)
+            {
+                spriteRenderer.flipX = false; // Face right
+            }
+            else if (movement.x < 0)
+            {
+                spriteRenderer.flipX = true; // Face left
+            }
         }
 
-        // Flip the character's sprite based on movement direction
-        if (movement.x > 0)
-        {
-            spriteRenderer.flipX = false; // Face right
-        }
-        else if (movement.x < 0)
-        {
-            spriteRenderer.flipX = true; // Face left
-        }
-
-        // Set the Speed parameter to simulate movement for debugging
+        // Set the Speed parameter for animation
         float simulatedSpeed = movement.sqrMagnitude > 0 ? 0.5f : 0f;
         animator.SetFloat("Speed", simulatedSpeed);
 
+        // Roll and Attack inputs
         if (Input.GetKeyDown(KeyCode.Space) && !isRolling && movement != Vector2.zero)
         {
-            Debug.Log("Spacebar pressed and not rolling or moving.");
             StartCoroutine(Roll());
         }
 
@@ -73,6 +83,8 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Attack());
         }
     }
+
+
 
     private IEnumerator Attack()
     { 
@@ -172,14 +184,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 DetermineAttackDirection()
     {
-        // Determine the attack direction based on the player's current movement direction
-        if (Mathf.Abs(movement.x) > Mathf.Abs(movement.y))
-        {
-            return movement.x > 0 ? Vector2.right : Vector2.left;
-        }
-        else
-        {
-            return movement.y > 0 ? Vector2.up : Vector2.down;
-        }
+        // Use the last movement direction if currently stationary
+        return movement == Vector2.zero ? lastMovementDirection : movement.normalized;
     }
 }
