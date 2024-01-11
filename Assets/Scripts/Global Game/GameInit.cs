@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class GameInitializer : MonoBehaviour
 {
-    public GameObject playerPrefab; // Assign the Player prefab here in the Inspector
-    public Transform playerSpawnPoint; // Assign a Transform to dictate where the player should spawn
+    public GameObject playerPrefab;
+    public Transform playerSpawnPoint;
 
-    public GameObject enemyPrefab; // Assign the Enemy prefab here in the Inspector
-    public Transform enemySpawnPoint; // Assign a Transform for the enemy spawn point
+    public GameObject[] enemyPrefabs; // Array of different enemy prefabs
+    public Transform[] enemySpawnPoints; // Array of enemy spawn points
 
     void Start()
     {
@@ -15,7 +15,11 @@ public class GameInitializer : MonoBehaviour
             Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
         }
 
-        // Instantiate an enemy at the enemy spawn point
-        Instantiate(enemyPrefab, enemySpawnPoint.position, enemySpawnPoint.rotation);
+        for (int i = 0; i < enemySpawnPoints.Length; i++)
+        {
+            int prefabIndex = Random.Range(0, enemyPrefabs.Length); // Randomly select an enemy prefab
+            Transform spawnPoint = enemySpawnPoints[i];
+            Instantiate(enemyPrefabs[prefabIndex], spawnPoint.position, spawnPoint.rotation);
+        }
     }
 }
