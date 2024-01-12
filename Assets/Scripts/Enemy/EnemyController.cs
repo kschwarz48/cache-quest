@@ -16,6 +16,7 @@ public class EnemyController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     private State currentState;
+    private bool isChaseEnabled = true;
 
     public float walkDistance = 2f;
     public float pauseDuration = 2f;
@@ -26,8 +27,6 @@ public class EnemyController : MonoBehaviour
     public float detectionRange = 5f;
     public float attackRange = 2f;
 
-    private bool isAttacking = false;
-
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -37,53 +36,39 @@ public class EnemyController : MonoBehaviour
         startPosition = rb.position;
         currentState = State.Patrolling;
         StartCoroutine(Patrol());
-        Debug.Log("Starting patrol.");
-        if (player == null) {
-        Debug.LogError("Player object not found for " + gameObject.name);
-        } else {
-            Debug.Log(gameObject.name + " is targeting player: " + player.name);
-        }
     }
 
     void Update()
     {
         float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
-        Debug.Log(gameObject.name + " Distance to player: " + distanceToPlayer);
 
-
-        if (!isAttacking)
+        switch (currentState)
         {
-            if (distanceToPlayer <= detectionRange)
-            {
-                Debug.Log(gameObject.name + " is within detection range.");
-                if (currentState != State.Chasing)
+            case State.Patrolling:
+                if (distanceToPlayer <= detectionRange)
                 {
                     currentState = State.Chasing;
-                    StopCoroutine(Patrol());
-                    Debug.Log(gameObject.name + " stopping patrol, starting chase.");
                 }
-
+                break;
+            case State.Chasing:
                 if (distanceToPlayer <= attackRange)
                 {
-                    currentState = State.Attacking;
                     StartCoroutine(Attack());
-                    Debug.Log(gameObject.name + " attacking player.");
                 }
-                else
+                else if (distanceToPlayer > detectionRange)
+                {
+                    currentState = State.Patrolling;
+                }
+                else if (isChaseEnabled)
                 {
                     MoveTowards(player.transform.position);
-                    Debug.Log(gameObject.name + " chasing player.");
                 }
-            }
-            else if (currentState != State.Patrolling)
-            {
-                currentState = State.Patrolling;
-                StartCoroutine(Patrol());
-                Debug.Log(gameObject.name + " player out of range, returning to patrol.");
-            }
+                break;
+            case State.Attacking:
+                // Attack logic is handled in the Attack coroutine
+                break;
         }
     }
-
 
     private IEnumerator Patrol()
     {
@@ -124,12 +109,12 @@ public class EnemyController : MonoBehaviour
 
     private IEnumerator Attack()
     {
-        isAttacking = true;
+        currentState = State.Attacking;
+        isChaseEnabled = false;
 
         // Lunge towards the player's position
         Vector2 originalPosition = transform.position;
         Vector2 targetPosition = player.transform.position;
-        float lungeSpeed = moveSpeed * 2;
         float lungeTime = 0.5f;
 
         float startTime = Time.time;
@@ -139,14 +124,9 @@ public class EnemyController : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1f); // Pause after attack
 
-        isAttacking = false;
+        isChaseEnabled = true;
         currentState = State.Chasing;
-    }
-
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        // Handle collision with player or other objects
     }
 }

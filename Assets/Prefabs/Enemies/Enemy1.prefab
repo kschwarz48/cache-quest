@@ -128,12 +128,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba0872763bec1b4ebad57565bb7f9e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 8
   walkDistance: 2
   pauseDuration: 2
   player: {fileID: 8707608179069307163, guid: 74701e80a4295a24188962550e280506, type: 3}
-  detectionRange: 8
-  attackRange: 2
+  detectionRange: 12
+  attackRange: 5
 --- !u!61 &2725807798005127712
 BoxCollider2D:
   m_ObjectHideFlags: 0
