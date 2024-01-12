@@ -26,6 +26,9 @@ public class PlayerController : MonoBehaviour
     private float lastAttackTime; // Time of the last attack
     private Collider2D currentAttackHitbox;
     private HashSet<GameObject> hitEnemies;
+    private int attackSequence = 0;
+    private float timeSinceLastAttack;
+    private float attackSequenceResetTime = 1.0f;
 
 
     void Awake()
@@ -70,6 +73,19 @@ public class PlayerController : MonoBehaviour
             {
                 spriteRenderer.flipX = true; // Face left
             }
+
+            timeSinceLastAttack += Time.deltaTime;
+
+            if (Input.GetMouseButtonDown(0) && !isRolling && !isAttacking)
+            {
+                if (timeSinceLastAttack > attackSequenceResetTime)
+                {
+                    attackSequence = 0; // Reset the attack sequence if there's a delay
+                }
+
+                StartCoroutine(Attack());
+                timeSinceLastAttack = 0; // Reset time since last attack
+            }
         }
 
         // Set the Speed parameter for animation
@@ -93,6 +109,25 @@ public class PlayerController : MonoBehaviour
         lastAttackTime = Time.time;
         hitEnemies = new HashSet<GameObject>(); // Initialize the set for this attack
         animator.SetBool("isAttacking", true);
+
+        isAttacking = true;
+        animator.SetBool("isAttacking", true);
+
+        // Trigger the appropriate attack animation based on the sequence
+        switch (attackSequence)
+        {
+            case 0:
+                animator.SetTrigger("Attack1");
+                break;
+            case 1:
+                animator.SetTrigger("Attack2");
+                break;
+            case 2:
+                animator.SetTrigger("Attack3");
+                break;
+        }
+
+        attackSequence = (attackSequence + 1) % 3;
 
         currentAttackDirection = DetermineAttackDirection();
         currentAttackHitbox = GetAttackHitbox(currentAttackDirection);
