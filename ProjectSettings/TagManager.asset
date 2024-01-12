@@ -8,6 +8,7 @@ TagManager:
   - ExitTrigger
   - Enemy
   - Destructible
+  - PlayerHUD
   layers:
   - Default
   - TransparentFX
