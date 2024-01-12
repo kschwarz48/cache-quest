@@ -5,8 +5,10 @@ public class GameInitializer : MonoBehaviour
     public GameObject playerPrefab;
     public Transform playerSpawnPoint;
 
-    public GameObject[] enemyPrefabs; // Array of different enemy prefabs
-    public Transform[] enemySpawnPoints; // Array of enemy spawn points
+    public GameObject[] enemyPrefabs;
+    public Transform[] enemySpawnPoints;
+
+    public GameObject playerHUDPrefab;
 
     void Start()
     {
@@ -15,9 +17,17 @@ public class GameInitializer : MonoBehaviour
             Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
         }
 
+        // Instantiate PlayerHUD and make it persistent across scenes
+        if (GameObject.FindWithTag("PlayerHUD") == null)
+        {
+            var playerHUD = Instantiate(playerHUDPrefab);
+            DontDestroyOnLoad(playerHUD);
+        }
+
+        // Instantiate enemies
         for (int i = 0; i < enemySpawnPoints.Length; i++)
         {
-            int prefabIndex = Random.Range(0, enemyPrefabs.Length); // Randomly select an enemy prefab
+            int prefabIndex = Random.Range(0, enemyPrefabs.Length);
             Transform spawnPoint = enemySpawnPoints[i];
             Instantiate(enemyPrefabs[prefabIndex], spawnPoint.position, spawnPoint.rotation);
         }
