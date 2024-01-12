@@ -131,6 +131,8 @@ MonoBehaviour:
   moveSpeed: 3
   walkDistance: 2
   pauseDuration: 2
+  player: {fileID: 8707608179069307163, guid: 74701e80a4295a24188962550e280506, type: 3}
+  detectionRange: 5
 --- !u!61 &2725807798005127712
 BoxCollider2D:
   m_ObjectHideFlags: 0
