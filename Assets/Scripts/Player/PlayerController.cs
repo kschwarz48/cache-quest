@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private bool isRolling = false;
     private bool isAttacking = false;
-    private float originalSpeed = 5f;
+    private float originalSpeed = 4f;
     public float rollSpeedMultiplier = 200f;
     public float rollDuration = 0.34f;
     private float attackCooldown = 0.5f; // Cooldown duration in seconds
