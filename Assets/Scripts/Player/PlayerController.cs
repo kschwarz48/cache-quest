@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
     private float timeSinceLastAttack;
     private float attackSequenceResetTime = 1.0f;
 
-
     void Awake()
     {
         if (Instance == null)
@@ -56,22 +55,13 @@ public class PlayerController : MonoBehaviour
         if (!isRolling)
         {
             Vector2 newMovement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-
-            // Always update the movement vector, but update lastMovementDirection only when there's movement
-            if (newMovement != Vector2.zero)
-            {
-                lastMovementDirection = newMovement.normalized; // Update the last movement direction
-            }
             movement = newMovement;
 
-            // Flip the character's sprite based on movement direction
-            if (movement.x > 0)
+            // Update the sprite's orientation only when not attacking
+            if (newMovement != Vector2.zero && !isAttacking)
             {
-                spriteRenderer.flipX = false; // Face right
-            }
-            else if (movement.x < 0)
-            {
-                spriteRenderer.flipX = true; // Face left
+                lastMovementDirection = newMovement.normalized;
+                spriteRenderer.flipX = lastMovementDirection.x < 0;
             }
 
             timeSinceLastAttack += Time.deltaTime;
@@ -101,46 +91,43 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(Attack());
         }
-    }
-
-    private IEnumerator Attack()
-    { 
-        isAttacking = true;
-        lastAttackTime = Time.time;
-        hitEnemies = new HashSet<GameObject>(); // Initialize the set for this attack
-        animator.SetBool("isAttacking", true);
-
-        isAttacking = true;
-        animator.SetBool("isAttacking", true);
-
-        // Trigger the appropriate attack animation based on the sequence
-        switch (attackSequence)
-        {
-            case 0:
-                animator.SetTrigger("Attack1");
-                break;
-            case 1:
-                animator.SetTrigger("Attack2");
-                break;
-            case 2:
-                animator.SetTrigger("Attack3");
-                break;
         }
 
-        attackSequence = (attackSequence + 1) % 3;
+        private IEnumerator Attack()
+        {
+            isAttacking = true;
+            lastAttackTime = Time.time;
+            hitEnemies = new HashSet<GameObject>(); // Initialize the set for this attack
+            animator.SetBool("isAttacking", true);
 
-        currentAttackDirection = DetermineAttackDirection();
-        currentAttackHitbox = GetAttackHitbox(currentAttackDirection);
-        EnableAttackHitbox();
+            currentAttackDirection = lastMovementDirection;  // Use the last movement direction for attack direction
+            currentAttackHitbox = GetAttackHitbox(currentAttackDirection);
+            EnableAttackHitbox();
 
-        yield return new WaitForSeconds(0.5f); 
+            // Trigger the appropriate attack animation based on the sequence
+            switch (attackSequence)
+            {
+                case 0:
+                    animator.SetTrigger("Attack1");
+                    break;
+                case 1:
+                    animator.SetTrigger("Attack2");
+                    break;
+                case 2:
+                    animator.SetTrigger("Attack3");
+                    break;
+            }
 
-        DisableAttackHitbox();
-        animator.SetBool("isAttacking", false);
-        isAttacking = false;
-    }
+            attackSequence = (attackSequence + 1) % 3;
 
-    private Collider2D GetAttackHitbox(Vector2 direction)
+            yield return new WaitForSeconds(0.5f); // Attack duration
+
+            DisableAttackHitbox();
+            animator.SetBool("isAttacking", false);
+            isAttacking = false;
+        }
+
+        private Collider2D GetAttackHitbox(Vector2 direction)
     {
         if (direction == Vector2.up)
             return attackHitboxUp;
@@ -162,27 +149,6 @@ public class PlayerController : MonoBehaviour
     {
         if (currentAttackHitbox != null)
             currentAttackHitbox.enabled = false;
-    }
-    void EnableCorrectHitbox(Vector2 direction)
-    {
-        DisableAllHitboxes(); // First, disable all hitboxes
-
-        if (direction == Vector2.up && attackHitboxUp != null)
-        {
-            attackHitboxUp.enabled = true;
-        }
-        else if (direction == Vector2.down && attackHitboxDown != null)
-        {
-            attackHitboxDown.enabled = true;
-        }
-        else if (direction == Vector2.left && attackHitboxLeft != null)
-        {
-            attackHitboxLeft.enabled = true;
-        }
-        else if (direction == Vector2.right && attackHitboxRight != null)
-        {
-            attackHitboxRight.enabled = true;
-        }
     }
 
     void DisableAllHitboxes()
@@ -222,11 +188,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-
     private IEnumerator Roll()
     {
-        Vector2 rollDirection = movement.normalized;  // Capture the current movement direction at the start of the roll
+        Vector2 rollDirection = movement.normalized; // Capture the current movement direction at the start of the roll
         isRolling = true;
         animator.SetTrigger("RollNow");
 
@@ -236,7 +200,7 @@ public class PlayerController : MonoBehaviour
         while (Time.time < rollEndTime)
         {
             rb.MovePosition(rb.position + rollDirection * moveSpeed * Time.fixedDeltaTime);
-            yield return null;  // Wait for the next frame
+            yield return null; // Wait for the next frame
         }
 
         moveSpeed = originalSpeed;
@@ -248,10 +212,48 @@ public class PlayerController : MonoBehaviour
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 
-
-    private Vector2 DetermineAttackDirection()
+    void OnDrawGizmos()
     {
-        // Use the last movement direction if currently stationary
-        return movement == Vector2.zero ? lastMovementDirection : movement.normalized;
+        // Set the color of the Gizmo
+        Gizmos.color = Color.red;
+
+        // Draw hitbox for attackHitboxUp
+        if (attackHitboxUp != null && attackHitboxUp.enabled)
+        {
+            DrawPolygonHitboxGizmo(attackHitboxUp);
+        }
+
+        // Repeat for other hitboxes
+        if (attackHitboxDown != null && attackHitboxDown.enabled)
+        {
+            DrawPolygonHitboxGizmo(attackHitboxDown);
+        }
+
+        if (attackHitboxLeft != null && attackHitboxLeft.enabled)
+        {
+            DrawPolygonHitboxGizmo(attackHitboxLeft);
+        }
+
+        if (attackHitboxRight != null && attackHitboxRight.enabled)
+        {
+            DrawPolygonHitboxGizmo(attackHitboxRight);
+        }
+    }
+
+    void DrawPolygonHitboxGizmo(Collider2D hitbox)
+    {
+        if (hitbox is PolygonCollider2D polygonCollider)
+        {
+            // Draw a polygon for PolygonCollider2D
+            Vector2[] points = polygonCollider.points;
+            for (int i = 0; i < points.Length; i++)
+            {
+                // Transform the local points to world space
+                Vector2 currentPoint = hitbox.transform.TransformPoint(points[i]);
+                Vector2 nextPoint = hitbox.transform.TransformPoint(points[(i + 1) % points.Length]);
+
+                Gizmos.DrawLine(currentPoint, nextPoint);
+            }
+        }
     }
 }
