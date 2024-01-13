@@ -1,0 +1,1480 @@
+fileFormatVersion: 2
+guid: ed2864e3b435bf249b9bd5e36a29091c
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_0
+    originalName: 
+    pivot: {x: 0.5, y: -0.0896861}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 573
+      y: 689
+      width: 20
+      height: 223
+    spriteID: f4c2f5170322dae44899c3d2c4401d52
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 573, y: 689}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_1
+    originalName: 
+    pivot: {x: 0.5, y: -0.088495575}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 534
+      y: 232
+      width: 30
+      height: 226
+    spriteID: f5bf08963a0f83540860b14f6774cc61
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 534, y: 232}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_2
+    originalName: 
+    pivot: {x: 0.5, y: -0.08583691}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 211
+      y: 708
+      width: 36
+      height: 233
+    spriteID: 2c19e4d476c6d1043ae959fb3e27c7fb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 211, y: 708}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_3
+    originalName: 
+    pivot: {x: 0.4901961, y: -0.066945605}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 72
+      y: 464
+      width: 51
+      height: 239
+    spriteID: 3efceee7a9540e44bb25bda95eb7df09
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 72, y: 464}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_4
+    originalName: 
+    pivot: {x: 0.5135135, y: -0.090090096}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 320
+      y: 4
+      width: 37
+      height: 222
+    spriteID: d4e79d89bf0c2d14db9b13902352080b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 320, y: 4}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_5
+    originalName: 
+    pivot: {x: 0.53125, y: -0.09049774}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 410
+      y: 468
+      width: 32
+      height: 221
+    spriteID: 6812ac828c405e640b8ed7d5a1ee0156
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 410, y: 468}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_6
+    originalName: 
+    pivot: {x: 0.48387095, y: -0.090909086}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 494
+      y: 685
+      width: 31
+      height: 220
+    spriteID: ab765bd416326d74a87d75505ee37e12
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 494, y: 685}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_7
+    originalName: 
+    pivot: {x: 0.47222224, y: -0.09049774}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 365
+      y: 694
+      width: 36
+      height: 221
+    spriteID: cbd2526d7b19dfb4e98fd95912b43b4e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 365, y: 694}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_8
+    originalName: 
+    pivot: {x: 0.5, y: -0.0896861}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 265
+      y: 698
+      width: 46
+      height: 223
+    spriteID: 8204a8001f1a40644be232adaddca562
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 265, y: 698}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_9
+    originalName: 
+    pivot: {x: 0.48387095, y: -0.09049774}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 494
+      y: 456
+      width: 31
+      height: 221
+    spriteID: 6ab9544c57a00a647a1bcada98a5a798
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 494, y: 456}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_11
+    originalName: 
+    pivot: {x: 0.5, y: -0.07929515}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 410
+      y: 233
+      width: 32
+      height: 227
+    spriteID: 6354fb0896026ea498fdb5e10254710d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 410, y: 233}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_12
+    originalName: 
+    pivot: {x: 0.5, y: -0.090090096}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 719
+      width: 58
+      height: 222
+    spriteID: 3d59ea1c9ede09d47a2a7fca7efa83a9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 719}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_13
+    originalName: 
+    pivot: {x: 0.5081967, y: -0.049773756}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 72
+      y: 4
+      width: 61
+      height: 221
+    spriteID: 355fd3af678e79b48b4cc0cbeed13e5f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 72, y: 4}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_26
+    originalName: 
+    pivot: {x: 0.5, y: -0.09049774}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 410
+      y: 697
+      width: 32
+      height: 221
+    spriteID: fe4d24b15c314cc4e9980cd8f00144ec
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 410, y: 697}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_27
+    originalName: 
+    pivot: {x: 0.5, y: -0.090909086}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 454
+      y: 233
+      width: 32
+      height: 220
+    spriteID: c6a73541ab310334bafbde18e0d48649
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 454, y: 233}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_28
+    originalName: 
+    pivot: {x: 0.5, y: -0.091324195}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 534
+      y: 699
+      width: 30
+      height: 219
+    spriteID: 20753c5780545874ebefa72da3754500
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 534, y: 699}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_29
+    originalName: 
+    pivot: {x: 0.5, y: -0.091324195}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 573
+      y: 4
+      width: 30
+      height: 219
+    spriteID: 1f4efa0d586d5aa4a8468021729baf57
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 573, y: 4}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_31
+    originalName: 
+    pivot: {x: 0.5, y: -0.09174311}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 454
+      y: 461
+      width: 32
+      height: 218
+    spriteID: e44a699b1d8d7fe43b3ea3118c298641
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 454, y: 461}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_32
+    originalName: 
+    pivot: {x: 0.5, y: -0.08810572}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 573
+      y: 454
+      width: 28
+      height: 227
+    spriteID: e46220e9ec5fb5348bb7fa2a50c633fb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 573, y: 454}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_36
+    originalName: 
+    pivot: {x: 0.53333336, y: -0.093023255}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 573
+      y: 231
+      width: 30
+      height: 215
+    spriteID: ce1b253a550373640843f61925eb772d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 573, y: 231}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_44
+    originalName: 
+    pivot: {x: 0.5, y: -0.08928572}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 265
+      y: 466
+      width: 46
+      height: 224
+    spriteID: 2b85ee549e3bcdb43be96019d86d119c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 265, y: 466}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_45
+    originalName: 
+    pivot: {x: 0.5185185, y: -0.075555556}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 72
+      y: 711
+      width: 54
+      height: 225
+    spriteID: 02aedbee2388c124a80d18e3b6cf024c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 72, y: 711}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_46
+    originalName: 
+    pivot: {x: 0.5, y: -0.08}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 247
+      width: 58
+      height: 225
+    spriteID: 2978ab633a0f05a4c9b1ad72ac1933ac
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 247}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_48
+    originalName: 
+    pivot: {x: 0.34210527, y: -0.08888889}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 211
+      y: 475
+      width: 38
+      height: 225
+    spriteID: 8da363ce902aa2a4faaad8e3950207fc
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 211, y: 475}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_49
+    originalName: 
+    pivot: {x: 0.5, y: -0.04761905}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 480
+      width: 56
+      height: 231
+    spriteID: 2707187ace134204cb6ac1350ef69ef6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 480}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_50
+    originalName: 
+    pivot: {x: 0.5, y: -0.04680851}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 60
+      height: 235
+    spriteID: 32ace53d0fd960446a1c6ec1642fbd55
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_52
+    originalName: 
+    pivot: {x: 0.5, y: -0.08888889}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 534
+      y: 466
+      width: 30
+      height: 225
+    spriteID: a32738646d9293543b400b1f24a3a7be
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 534, y: 466}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_53
+    originalName: 
+    pivot: {x: 0.5, y: -0.091324195}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 141
+      y: 672
+      width: 52
+      height: 219
+    spriteID: ecc4abe10d27afe47a3ddc5ec76069c3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 141, y: 672}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_54
+    originalName: 
+    pivot: {x: 0.5, y: -0.094339624}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 141
+      y: 4
+      width: 62
+      height: 212
+    spriteID: a640b0c64272e184594f427913c10cbd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 141, y: 4}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_57
+    originalName: 
+    pivot: {x: 0.425, y: -0.0896861}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 211
+      y: 244
+      width: 40
+      height: 223
+    spriteID: a12fe1fc3d98bf54faceaa76147960ae
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 211, y: 244}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_58
+    originalName: 
+    pivot: {x: 0.5, y: -0.090909086}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 141
+      y: 444
+      width: 52
+      height: 220
+    spriteID: 2b5d00f0b26ad8c4e8994ba25cc3de6b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 141, y: 444}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_59
+    originalName: 
+    pivot: {x: 0.5, y: -0.076233186}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 72
+      y: 233
+      width: 56
+      height: 223
+    spriteID: e160d32fd8711fc49b31c9ec843520bc
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 72, y: 233}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_10
+    originalName: 
+    pivot: {x: 0.5135135, y: -0.090090096}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 320
+      y: 234
+      width: 37
+      height: 222
+    spriteID: 7b95dfbda24d46348aa89159b4d758e7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 320, y: 234}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_22
+    originalName: 
+    pivot: {x: 0.5135135, y: -0.090090096}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 320
+      y: 464
+      width: 37
+      height: 222
+    spriteID: bfac80d50dec8f94b97e0071e546d48b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 320, y: 464}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_23
+    originalName: 
+    pivot: {x: 0.53125, y: -0.09049774}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 454
+      y: 4
+      width: 32
+      height: 221
+    spriteID: 41dccb7bfb2efc94db1e7e512f3b8126
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 454, y: 4}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_24
+    originalName: 
+    pivot: {x: 0.48387095, y: -0.090909086}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 534
+      y: 4
+      width: 31
+      height: 220
+    spriteID: 9ad4851dcab4c164eb9cc27eeb62331f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 534, y: 4}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_25
+    originalName: 
+    pivot: {x: 0.47222224, y: -0.09049774}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 410
+      y: 4
+      width: 36
+      height: 221
+    spriteID: 274435b5dedf71641be321690aa2f359
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 410, y: 4}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_30
+    originalName: 
+    pivot: {x: 0.5135135, y: -0.090090096}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 320
+      y: 694
+      width: 37
+      height: 222
+    spriteID: 3e5b17a36900b364eb90f30d65407e06
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 320, y: 694}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_33
+    originalName: 
+    pivot: {x: 0.5, y: -0.09174311}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 454
+      y: 687
+      width: 32
+      height: 218
+    spriteID: 59bd41f8cf3c2c94ab35eb819ae93fc2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 454, y: 687}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_34
+    originalName: 
+    pivot: {x: 0.5135135, y: -0.090090096}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 365
+      y: 4
+      width: 37
+      height: 222
+    spriteID: db6852e32f181344e8655d95fa3b542b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 365, y: 4}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_35
+    originalName: 
+    pivot: {x: 0.5, y: -0.09174311}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 494
+      y: 4
+      width: 32
+      height: 218
+    spriteID: 6c44cfc1f34a9ec44a8c27bfbd30abd3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 494, y: 4}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_37
+    originalName: 
+    pivot: {x: 0.5, y: -0.09174311}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 494
+      y: 230
+      width: 32
+      height: 218
+    spriteID: b85bd2158d2e0b04e8a421b82d002d08
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 494, y: 230}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_43
+    originalName: 
+    pivot: {x: 0.5135135, y: -0.090090096}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 365
+      y: 234
+      width: 37
+      height: 222
+    spriteID: d10e925b23ebb4f4eb950bfa8dba79ee
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 365, y: 234}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_47
+    originalName: 
+    pivot: {x: 0.4042553, y: -0.0896861}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 265
+      y: 4
+      width: 47
+      height: 223
+    spriteID: 2e7f490b386081f45a11e6bb725308cf
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 265, y: 4}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_51
+    originalName: 
+    pivot: {x: 0.5652174, y: -0.060344826}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 211
+      y: 4
+      width: 46
+      height: 232
+    spriteID: 4e6d51de1e4f149408759357d6d8f738
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 211, y: 4}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_55
+    originalName: 
+    pivot: {x: 0.5, y: -0.094339624}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 141
+      y: 224
+      width: 56
+      height: 212
+    spriteID: 3892dc1b1b1f9304c82be41bd30bbefd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 141, y: 224}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_56
+    originalName: 
+    pivot: {x: 0.5135135, y: -0.090090096}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 365
+      y: 464
+      width: 37
+      height: 222
+    spriteID: b63413b176a5ffc4980bcac34084a0e0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 365, y: 464}
+  - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_60
+    originalName: 
+    pivot: {x: 0.5319149, y: -0.076233186}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 265
+      y: 235
+      width: 47
+      height: 223
+    spriteID: e4801a380ec9e104bb1f038b5c1ffe34
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 265, y: 235}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: 597594075
+    name: Mana Seed Sword & Shield Combat Outfit Canvas
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 22
+        y: 20
+        width: 20
+        height: 223
+      spriteId: f4c2f5170322dae44899c3d2c4401d52
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 17
+        y: 20
+        width: 30
+        height: 226
+      spriteId: f5bf08963a0f83540860b14f6774cc61
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 14
+        y: 20
+        width: 36
+        height: 233
+      spriteId: 2c19e4d476c6d1043ae959fb3e27c7fb
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 7
+        y: 16
+        width: 51
+        height: 239
+      spriteId: 3efceee7a9540e44bb25bda95eb7df09
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 13
+        y: 20
+        width: 37
+        height: 222
+      spriteId: d4e79d89bf0c2d14db9b13902352080b
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 15
+        y: 20
+        width: 32
+        height: 221
+      spriteId: 6812ac828c405e640b8ed7d5a1ee0156
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 17
+        y: 20
+        width: 31
+        height: 220
+      spriteId: ab765bd416326d74a87d75505ee37e12
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 15
+        y: 20
+        width: 36
+        height: 221
+      spriteId: cbd2526d7b19dfb4e98fd95912b43b4e
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 9
+        y: 20
+        width: 46
+        height: 223
+      spriteId: 8204a8001f1a40644be232adaddca562
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 17
+        y: 20
+        width: 31
+        height: 221
+      spriteId: 6ab9544c57a00a647a1bcada98a5a798
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_11
+      frameIndex: 11
+      cellRect:
+        x: 16
+        y: 18
+        width: 32
+        height: 227
+      spriteId: 6354fb0896026ea498fdb5e10254710d
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_12
+      frameIndex: 12
+      cellRect:
+        x: 3
+        y: 20
+        width: 58
+        height: 222
+      spriteId: 3d59ea1c9ede09d47a2a7fca7efa83a9
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_13
+      frameIndex: 13
+      cellRect:
+        x: 1
+        y: 11
+        width: 61
+        height: 221
+      spriteId: 355fd3af678e79b48b4cc0cbeed13e5f
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_26
+      frameIndex: 26
+      cellRect:
+        x: 16
+        y: 20
+        width: 32
+        height: 221
+      spriteId: fe4d24b15c314cc4e9980cd8f00144ec
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_27
+      frameIndex: 27
+      cellRect:
+        x: 16
+        y: 20
+        width: 32
+        height: 220
+      spriteId: c6a73541ab310334bafbde18e0d48649
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_28
+      frameIndex: 28
+      cellRect:
+        x: 17
+        y: 20
+        width: 30
+        height: 219
+      spriteId: 20753c5780545874ebefa72da3754500
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_29
+      frameIndex: 29
+      cellRect:
+        x: 17
+        y: 20
+        width: 30
+        height: 219
+      spriteId: 1f4efa0d586d5aa4a8468021729baf57
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_31
+      frameIndex: 31
+      cellRect:
+        x: 16
+        y: 20
+        width: 32
+        height: 218
+      spriteId: e44a699b1d8d7fe43b3ea3118c298641
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_32
+      frameIndex: 32
+      cellRect:
+        x: 18
+        y: 20
+        width: 28
+        height: 227
+      spriteId: e46220e9ec5fb5348bb7fa2a50c633fb
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_36
+      frameIndex: 36
+      cellRect:
+        x: 16
+        y: 20
+        width: 30
+        height: 215
+      spriteId: ce1b253a550373640843f61925eb772d
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_44
+      frameIndex: 44
+      cellRect:
+        x: 9
+        y: 20
+        width: 46
+        height: 224
+      spriteId: 2b85ee549e3bcdb43be96019d86d119c
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_45
+      frameIndex: 45
+      cellRect:
+        x: 4
+        y: 17
+        width: 54
+        height: 225
+      spriteId: 02aedbee2388c124a80d18e3b6cf024c
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_46
+      frameIndex: 46
+      cellRect:
+        x: 3
+        y: 18
+        width: 58
+        height: 225
+      spriteId: 2978ab633a0f05a4c9b1ad72ac1933ac
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_48
+      frameIndex: 48
+      cellRect:
+        x: 19
+        y: 20
+        width: 38
+        height: 225
+      spriteId: 8da363ce902aa2a4faaad8e3950207fc
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_49
+      frameIndex: 49
+      cellRect:
+        x: 4
+        y: 11
+        width: 56
+        height: 231
+      spriteId: 2707187ace134204cb6ac1350ef69ef6
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_50
+      frameIndex: 50
+      cellRect:
+        x: 2
+        y: 11
+        width: 60
+        height: 235
+      spriteId: 32ace53d0fd960446a1c6ec1642fbd55
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_52
+      frameIndex: 52
+      cellRect:
+        x: 17
+        y: 20
+        width: 30
+        height: 225
+      spriteId: a32738646d9293543b400b1f24a3a7be
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_53
+      frameIndex: 53
+      cellRect:
+        x: 6
+        y: 20
+        width: 52
+        height: 219
+      spriteId: ecc4abe10d27afe47a3ddc5ec76069c3
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_54
+      frameIndex: 54
+      cellRect:
+        x: 1
+        y: 20
+        width: 62
+        height: 212
+      spriteId: a640b0c64272e184594f427913c10cbd
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_57
+      frameIndex: 57
+      cellRect:
+        x: 15
+        y: 20
+        width: 40
+        height: 223
+      spriteId: a12fe1fc3d98bf54faceaa76147960ae
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_58
+      frameIndex: 58
+      cellRect:
+        x: 6
+        y: 20
+        width: 52
+        height: 220
+      spriteId: 2b5d00f0b26ad8c4e8994ba25cc3de6b
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_59
+      frameIndex: 59
+      cellRect:
+        x: 4
+        y: 17
+        width: 56
+        height: 223
+      spriteId: e160d32fd8711fc49b31c9ec843520bc
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_10
+      frameIndex: 10
+      cellRect:
+        x: 13
+        y: 20
+        width: 37
+        height: 222
+      spriteId: 7b95dfbda24d46348aa89159b4d758e7
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_22
+      frameIndex: 22
+      cellRect:
+        x: 13
+        y: 20
+        width: 37
+        height: 222
+      spriteId: bfac80d50dec8f94b97e0071e546d48b
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_23
+      frameIndex: 23
+      cellRect:
+        x: 15
+        y: 20
+        width: 32
+        height: 221
+      spriteId: 41dccb7bfb2efc94db1e7e512f3b8126
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_24
+      frameIndex: 24
+      cellRect:
+        x: 17
+        y: 20
+        width: 31
+        height: 220
+      spriteId: 9ad4851dcab4c164eb9cc27eeb62331f
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_25
+      frameIndex: 25
+      cellRect:
+        x: 15
+        y: 20
+        width: 36
+        height: 221
+      spriteId: 274435b5dedf71641be321690aa2f359
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_30
+      frameIndex: 30
+      cellRect:
+        x: 13
+        y: 20
+        width: 37
+        height: 222
+      spriteId: 3e5b17a36900b364eb90f30d65407e06
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_33
+      frameIndex: 33
+      cellRect:
+        x: 16
+        y: 20
+        width: 32
+        height: 218
+      spriteId: 59bd41f8cf3c2c94ab35eb819ae93fc2
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_34
+      frameIndex: 34
+      cellRect:
+        x: 13
+        y: 20
+        width: 37
+        height: 222
+      spriteId: db6852e32f181344e8655d95fa3b542b
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_35
+      frameIndex: 35
+      cellRect:
+        x: 16
+        y: 20
+        width: 32
+        height: 218
+      spriteId: 6c44cfc1f34a9ec44a8c27bfbd30abd3
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_37
+      frameIndex: 37
+      cellRect:
+        x: 16
+        y: 20
+        width: 32
+        height: 218
+      spriteId: b85bd2158d2e0b04e8a421b82d002d08
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_43
+      frameIndex: 43
+      cellRect:
+        x: 13
+        y: 20
+        width: 37
+        height: 222
+      spriteId: d10e925b23ebb4f4eb950bfa8dba79ee
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_47
+      frameIndex: 47
+      cellRect:
+        x: 13
+        y: 20
+        width: 47
+        height: 223
+      spriteId: 2e7f490b386081f45a11e6bb725308cf
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_51
+      frameIndex: 51
+      cellRect:
+        x: 6
+        y: 14
+        width: 46
+        height: 232
+      spriteId: 4e6d51de1e4f149408759357d6d8f738
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_55
+      frameIndex: 55
+      cellRect:
+        x: 4
+        y: 20
+        width: 56
+        height: 212
+      spriteId: 3892dc1b1b1f9304c82be41bd30bbefd
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_56
+      frameIndex: 56
+      cellRect:
+        x: 13
+        y: 20
+        width: 37
+        height: 222
+      spriteId: b63413b176a5ffc4980bcac34084a0e0
+    - name: Mana Seed Sword & Shield Combat Outfit Canvas_Frame_60
+      frameIndex: 60
+      cellRect:
+        x: 7
+        y: 17
+        width: 47
+        height: 223
+      spriteId: e4801a380ec9e104bb1f038b5c1ffe34
+    linkedCells: []
+    parentIndex: -1
+  platformSettings: []
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 64, y: 256}
