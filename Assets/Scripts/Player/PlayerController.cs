@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
     private float timeSinceLastAttack;
     private float attackSequenceResetTime = 1.0f;
 
+    private int lastDirection;
+
 
     void Awake()
     {
@@ -47,61 +49,103 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        lastMovementDirection = Vector2.right; // Default direction, adjust as needed
+        lastMovementDirection = Vector2.down; // Default to facing down
         DisableAllHitboxes(); 
+        lastDirection = 0; // Down
+
+        // Initialize to idle down values
+        animator.SetFloat("Horizontal", 0f);
+        animator.SetFloat("Vertical", -1f); // Assuming -1 is the 'down' direction
+        lastDirection = 0; // Assuming this is the index for 'down'
     }
 
     void Update()
     {
-        if (!isRolling)
+        if (!isRolling && !isAttacking)
         {
-            Vector2 newMovement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-
-            // Always update the movement vector, but update lastMovementDirection only when there's movement
-            if (newMovement != Vector2.zero)
-            {
-                lastMovementDirection = newMovement.normalized; // Update the last movement direction
-            }
-            movement = newMovement;
-
-            // Flip the character's sprite based on movement direction
-            if (movement.x > 0)
-            {
-                spriteRenderer.flipX = false; // Face right
-            }
-            else if (movement.x < 0)
-            {
-                spriteRenderer.flipX = true; // Face left
-            }
-
-            timeSinceLastAttack += Time.deltaTime;
-
-            if (Input.GetMouseButtonDown(0) && !isRolling && !isAttacking)
-            {
-                if (timeSinceLastAttack > attackSequenceResetTime)
-                {
-                    attackSequence = 0; // Reset the attack sequence if there's a delay
-                }
-
-                StartCoroutine(Attack());
-                timeSinceLastAttack = 0; // Reset time since last attack
-            }
+            HandleMovementInput();
+            HandleAttackInput();
         }
 
-        // Set the Speed parameter for animation
-        float simulatedSpeed = movement.sqrMagnitude > 0 ? 0.5f : 0f;
-        animator.SetFloat("Speed", simulatedSpeed);
+        UpdateAnimatorParameters();
+    }
 
-        // Roll and Attack inputs
-        if (Input.GetKeyDown(KeyCode.Space) && !isRolling && movement != Vector2.zero)
+
+    private void HandleMovementInput()
+    {
+        Vector2 newMovement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+        if (newMovement != Vector2.zero)
         {
-            StartCoroutine(Roll());
+            lastMovementDirection = newMovement.normalized;
+            movement = newMovement.normalized; // Normalize the movement vector
         }
-        if (Input.GetMouseButtonDown(0) && !isRolling && !isAttacking && Time.time >= lastAttackTime + attackCooldown)  
+        else if (movement != Vector2.zero) // Check if movement just stopped
         {
-            StartCoroutine(Attack());
+            movement = Vector2.zero;
+            SetIdleParameters();
         }
     }
+
+
+    private void HandleAttackInput()
+    {
+        if (Input.GetMouseButtonDown(0) && Time.time >= lastAttackTime + attackCooldown)
+        {
+            StartCoroutine(Attack());
+            timeSinceLastAttack = 0; // Reset time since last attack
+            attackSequence = (attackSequence + 1) % 3; // Update the attack sequence
+        }
+    }
+
+    private void UpdateAttackSequence()
+    {
+        timeSinceLastAttack += Time.deltaTime;
+        if (timeSinceLastAttack > attackSequenceResetTime)
+        {
+            attackSequence = 0; // Reset the attack sequence if there's a delay
+        }
+    }
+
+    private void UpdateAnimatorParameters()
+    {
+        float speed = movement.magnitude;
+
+        // Normalize the movement vector and update the Animator
+        Vector2 normMovement = movement.normalized;
+        animator.SetFloat("Speed", speed);
+        animator.SetFloat("Horizontal", normMovement.x);
+        animator.SetFloat("Vertical", normMovement.y);
+
+        if (speed > 0f)
+        {
+            // Update the lastDirection based on the current movement direction
+            UpdateDirectionBasedOnMovement(normMovement);
+        }
+        else
+        {
+            // Ensure that the idle animation in the last direction is used
+            SetIdleParameters();
+        }
+    }
+
+    private void SetIdleParameters()
+    {
+        animator.SetInteger("Direction", lastDirection);
+        animator.SetFloat("Speed", 0f);
+    }
+
+    private void UpdateDirectionBasedOnMovement(Vector2 normMovement)
+    {
+        if (normMovement.x > 0) lastDirection = 3; // Right
+        else if (normMovement.x < 0) lastDirection = 1; // Left
+        else if (normMovement.y > 0) lastDirection = 2; // Up
+        else if (normMovement.y < 0) lastDirection = 0; // Down
+
+        // Update the Direction in Animator
+        animator.SetInteger("Direction", lastDirection);
+    }
+
 
     private IEnumerator Attack()
     { 
