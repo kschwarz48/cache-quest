@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1099138888311561386}
   - component: {fileID: 8264908795344345151}
   - component: {fileID: 553786818218732542}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3785424790287383968}
   - component: {fileID: 2481212519380433345}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: attackHitboxRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5993142604282088650}
   - component: {fileID: 8318905774384880773}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: attackHitboxLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,7 +288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2704377864635039976}
   - component: {fileID: 4586660196466911500}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: attackHitboxUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 636115330304164439}
   - component: {fileID: 8154696398132020951}
   - component: {fileID: 4449756163453940879}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -659,7 +659,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7846458241399136356}
   - component: {fileID: 6403243944604710624}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: attackHitboxDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}

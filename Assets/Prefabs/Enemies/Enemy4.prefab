@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8611972225551818864}
   - component: {fileID: 1050690676266924960}
   - component: {fileID: 6861812370983452279}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy4
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5919730884113555689}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -147,6 +147,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 30
+  knockbackStrength: 10
+  blinkDuration: 0.1
 --- !u!61 &1050690676266924960
 BoxCollider2D:
   m_ObjectHideFlags: 0

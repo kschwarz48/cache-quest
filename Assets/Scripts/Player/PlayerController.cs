@@ -167,13 +167,20 @@ public class PlayerController : MonoBehaviour
     {
         if (!isAttacking) return;
         Debug.Log($"Collision with: {collision.gameObject.name}");
+
         if (collision.CompareTag("Enemy") && !hitEnemies.Contains(collision.gameObject))
         {
             EnemyHealth enemyHealth = collision.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
             {
                 Debug.Log("Attacked an enemy and dealing damage!");
-                enemyHealth.TakeDamage(10);
+
+                // Calculate knockback direction
+                Vector2 knockbackDirection = (collision.transform.position - transform.position).normalized;
+
+                // Apply damage and knockback
+                enemyHealth.TakeDamage(10, knockbackDirection);
+
                 hitEnemies.Add(collision.gameObject);
             }
         }

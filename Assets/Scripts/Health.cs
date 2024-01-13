@@ -11,23 +11,15 @@ public class Health : MonoBehaviour
     public event Action<int> OnHealthChanged;
     public event Action OnDeath;
 
-    void Awake()
+    protected virtual void Awake()
     {
         currentHealth = maxHealth;
     }
 
-    public int CurrentHealth
-    {
-        get { return currentHealth; }
-    }
+    public int CurrentHealth => currentHealth;
+    public int MaxHealth => maxHealth;
 
-
-    public int MaxHealth
-    {
-        get { return maxHealth; }
-    }
-
-    public void TakeDamage(int amount)
+    public virtual void TakeDamage(int amount, Vector2 knockbackDirection = default(Vector2))
     {
         currentHealth -= amount;
         OnHealthChanged?.Invoke(currentHealth);
@@ -37,7 +29,6 @@ public class Health : MonoBehaviour
             Die();
         }
     }
-
     public void Heal(int amount)
     {
         currentHealth += amount;
