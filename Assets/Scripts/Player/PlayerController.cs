@@ -12,14 +12,13 @@ public class PlayerController : MonoBehaviour
     public Collider2D attackHitboxRight;
     private Vector2 currentAttackDirection;
     private Vector2 lastMovementDirection;
-    public float moveSpeed = 5f;
+    public float moveSpeed = 500f;
     private Rigidbody2D rb;
     private Vector2 movement;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private bool isRolling = false;
     private bool isAttacking = false;
-    private float originalSpeed = 4f;
     public float rollSpeedMultiplier = 200f;
     public float rollDuration = 0.34f;
     private float attackCooldown = 0.5f; // Cooldown duration in seconds
@@ -30,8 +29,11 @@ public class PlayerController : MonoBehaviour
     private float timeSinceLastAttack;
     private float attackSequenceResetTime = 1.0f;
 
+    public float maxSpeed = 3.5f;
+
     private bool canMove = true;
 
+    public float idleFriction = 0.9f;
 
     void Awake()
     {
@@ -207,26 +209,43 @@ public class PlayerController : MonoBehaviour
         isRolling = true;
         animator.SetTrigger("RollNow");
 
-        moveSpeed *= rollSpeedMultiplier;
+        // Calculate the roll force based on the roll speed multiplier
+        Vector2 rollForce = rollDirection * rollSpeedMultiplier;
 
-        float rollEndTime = Time.time + rollDuration;
-        while (Time.time < rollEndTime)
-        {
-            rb.MovePosition(rb.position + rollDirection * moveSpeed * Time.fixedDeltaTime);
-            yield return null; // Wait for the next frame
-        }
+        // Apply the roll force once as an impulse for immediate effect
+        rb.AddForce(rollForce, ForceMode2D.Impulse);
 
-        moveSpeed = originalSpeed;
+        // Optionally, you might want to temporarily increase the drag on the Rigidbody2D to quickly slow down the roll after a certain duration
+        float originalDrag = rb.drag;
+        rb.drag = 5f; // Increase the drag to slow down the roll. Adjust this value as needed.
+
+        // Wait for the roll to complete based on the roll duration
+        yield return new WaitForSeconds(rollDuration);
+
+        // After rolling, reset the drag to its original value
+        rb.drag = originalDrag;
+
         isRolling = false;
     }
 
+
     void FixedUpdate()
     {
-        if (canMove || isRolling) // Allow movement if canMove is true or if the player is rolling
+        if ((canMove || isRolling) && !isAttacking) // Check if the player can move or is rolling but not attacking
         {
-            rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+            rb.AddForce(movement * moveSpeed * Time.deltaTime);
+
+            if(rb.velocity.magnitude > maxSpeed) {
+                float limitedSpeed = Mathf.Lerp(rb.velocity.magnitude, maxSpeed, idleFriction);
+                rb.velocity = rb.velocity.normalized * limitedSpeed;
+            }
+
+        } else {
+            rb.velocity = Vector2.Lerp(rb.velocity, Vector2.zero, idleFriction);
+
         }
     }
+
 
     void OnDrawGizmos()
     {

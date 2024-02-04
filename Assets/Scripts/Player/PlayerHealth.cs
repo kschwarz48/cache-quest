@@ -9,49 +9,55 @@ public class PlayerHealth : Health
     private Animator animator;
     public float knockbackStrength = 5000f;
 
+    private SpriteRenderer spriteRenderer;
+
     protected override void Awake()
     {
-        base.Awake(); // Call the base class Awake method
-        isAlive = true; // The player starts alive
+        base.Awake(); 
+        isAlive = true; 
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         animator.SetBool("isAlive", true);
+        spriteRenderer = GetComponent<SpriteRenderer>(); // Ensure this line is present and correct
+
     }
 
     public override void TakeDamage(int damage, Vector2 knockbackDirection = default)
     {
-        if (!isAlive) return; // Don't take damage if already dead
-
-        base.TakeDamage(damage); // Deduct health
+        if (!isAlive || isInvincible) return; 
+        base.TakeDamage(damage); 
         Debug.Log($"Player took {damage} damage! Current Health: {CurrentHealth}");
 
         if (CurrentHealth <= 0)
         {
             animator.SetBool("isAlive", false);
-            PlayerController.Instance.LockMovement(); // Prevent player from moving
-            Die(); // Trigger death logic
+            PlayerController.Instance.LockMovement(); 
+            Die(); 
         }
         else
         {
             rb.AddForce(knockbackDirection.normalized * knockbackStrength, ForceMode2D.Force);
+            StartCoroutine(BlinkEffect()); 
         }
     }
-
+    private IEnumerator BlinkEffect()
+    {
+        Color originalColor = spriteRenderer.color; // Store the original color
+        spriteRenderer.color = Color.red; // Change color to red to indicate damage
+        yield return new WaitForSeconds(0.1f); // Wait for 0.1 second
+        spriteRenderer.color = originalColor; // Revert to the original color
+    }
     protected override void Die()
     {
-        if (!isAlive) return; // Prevent Die from running multiple times
-
+        if (!isAlive) return;
         isAlive = false;
-        
         Debug.Log("Player died!");
-        // Call the GameManager to respawn the player after a delay
-        // This delay allows the death animation to play out
-        Invoke(nameof(RespawnPlayer), 2f); // Adjust delay as needed
+        Invoke(nameof(RespawnPlayer), 2f); 
     }
 
     IEnumerator RespawnAfterDelay(float delay)
     {
-        yield return new WaitForSeconds(delay); // Make sure this delay is long enough for the animation to play
+        yield return new WaitForSeconds(delay); 
         RespawnPlayer();
     }
 
@@ -59,14 +65,9 @@ public class PlayerHealth : Health
     {
         base.ResetHealth();
         GameManager.Instance.RespawnPlayerAtSpawnPoint("InitalSpawnPoint");
- 
-        // Reset animation state
         animator.SetBool("isAlive", true);
-        animator.Play("Player_Idle"); // Or any default animation state
-        
-        // Re-enable any components disabled during death
+        animator.Play("Player_Idle"); 
         GetComponent<PlayerController>().enabled = true;
-        
         Debug.Log("Player respawned.");
         Debug.Log($"Current Health: {CurrentHealth}");
     }

@@ -1,12 +1,17 @@
 using UnityEngine;
 using System;
+using System.Collections;
 
 public class Health : MonoBehaviour
 {
     [SerializeField]
     private int maxHealth = 100;
-
     private int currentHealth;
+
+    [SerializeField]
+    private float invincibilityDuration = 0.5f; // Duration of invincibility after taking damage
+    public bool isInvincible = false; // Tracks whether the invincibility effect is currently active
+    public bool enableInvincibility = true; // Allows control over whether invincibility should be applied
 
     public event Action<int> OnHealthChanged;
     public event Action OnDeath;
@@ -21,6 +26,8 @@ public class Health : MonoBehaviour
 
     public virtual void TakeDamage(int amount, Vector2 knockbackDirection = default(Vector2))
     {
+        if (isInvincible || !enableInvincibility) return; // Skip taking damage if currently invincible or invincibility is disabled
+
         currentHealth -= amount;
         OnHealthChanged?.Invoke(currentHealth);
 
@@ -28,7 +35,19 @@ public class Health : MonoBehaviour
         {
             Die();
         }
+        else if (enableInvincibility)
+        {
+            StartCoroutine(ActivateInvincibility());
+        }
     }
+
+    private IEnumerator ActivateInvincibility()
+    {
+        isInvincible = true;
+        yield return new WaitForSeconds(invincibilityDuration);
+        isInvincible = false;
+    }
+
     public void Heal(int amount)
     {
         currentHealth += amount;
@@ -39,7 +58,6 @@ public class Health : MonoBehaviour
     protected virtual void Die()
     {
         OnDeath?.Invoke();
-        // Basic death logic (can be overridden in subclasses)
     }
 
     public void ResetHealth()
