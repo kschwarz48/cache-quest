@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 30
-  knockbackStrength: 10
+  knockbackStrength: 800
 --- !u!114 &2180501504579971606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,9 +198,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba0872763bec1b4ebad57565bb7f9e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 10
   walkDistance: 2
   pauseDuration: 2
   player: {fileID: 0}
-  detectionRange: 5
+  detectionRange: 10
   attackRange: 2

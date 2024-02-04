@@ -650,7 +650,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   isAlive: 1
-  knockbackStrength: 50
+  knockbackStrength: 800
 --- !u!1 &8733535228679508106
 GameObject:
   m_ObjectHideFlags: 0

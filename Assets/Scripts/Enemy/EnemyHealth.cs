@@ -27,7 +27,7 @@ public class EnemyHealth : Health
         Debug.Log($"Enemy took {damage} damage!");
 
         // Apply knockback
-        rb.AddForce(knockbackDirection.normalized * knockbackStrength, ForceMode2D.Impulse);
+        rb.AddForce(knockbackDirection.normalized * knockbackStrength, ForceMode2D.Force);
         if (enemyController != null)
         {
             enemyController.HandleKnockback(); // Tell the enemy controller to handle knockback

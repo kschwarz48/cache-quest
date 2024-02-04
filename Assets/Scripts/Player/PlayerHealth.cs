@@ -33,7 +33,7 @@ public class PlayerHealth : Health
         }
         else
         {
-            rb.AddForce(knockbackDirection.normalized * knockbackStrength, ForceMode2D.Impulse);
+            rb.AddForce(knockbackDirection.normalized * knockbackStrength, ForceMode2D.Force);
         }
     }
 
