@@ -181,7 +181,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Attacked an enemy and dealing damage!");
 
             // Calculate knockback direction
-            Vector2 knockbackDirection = (collision.transform.position - transform.position).normalized;
+            Vector2 knockbackDirection = (Vector2) (collision.transform.position - transform.position).normalized;
 
             // Apply damage and knockback
             enemyHealth.TakeDamage(10, knockbackDirection);

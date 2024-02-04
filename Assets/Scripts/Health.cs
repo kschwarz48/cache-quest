@@ -41,4 +41,10 @@ public class Health : MonoBehaviour
         OnDeath?.Invoke();
         // Basic death logic (can be overridden in subclasses)
     }
+
+    public void ResetHealth()
+    {
+        currentHealth = maxHealth;
+        OnHealthChanged?.Invoke(currentHealth);
+    }
 }

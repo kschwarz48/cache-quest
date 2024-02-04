@@ -22,10 +22,11 @@ public class EnemyController : MonoBehaviour
     public float pauseDuration = 2f;
     private Vector2 startPosition;
     private Vector2 patrolPoint;
-
     public GameObject player;
     public float detectionRange = 5f;
     public float attackRange = 2f;
+
+    private bool isKnockedBack = false;
 
     void Start()
     {
@@ -40,6 +41,7 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
+        if (isKnockedBack) return;
         float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
 
         switch (currentState)
@@ -129,4 +131,31 @@ public class EnemyController : MonoBehaviour
         isChaseEnabled = true;
         currentState = State.Chasing;
     }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Health playerHealth = collision.gameObject.GetComponent<Health>();
+            playerHealth.TakeDamage(50, (collision.transform.position - transform.position).normalized);
+        }
+    }
+
+    public void HandleKnockback()
+    {
+        // Handle knockback logic here, for example:
+        isKnockedBack = true; // Set the flag to true
+        StopAllCoroutines(); // Stop all other actions like patrolling, chasing, etc.
+        StartCoroutine(KnockbackCoroutine()); // Start knockback recovery routine
+    }
+
+    private IEnumerator KnockbackCoroutine()
+    {
+        yield return new WaitForSeconds(0.5f); // Duration of knockback effect
+        isKnockedBack = false; // Reset the flag after knockback duration
+        // Resume normal behavior, for example, start patrolling again
+        currentState = State.Patrolling;
+        StartCoroutine(Patrol());
+    }
+
 }

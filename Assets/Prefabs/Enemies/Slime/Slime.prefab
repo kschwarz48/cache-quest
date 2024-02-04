@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 179831887628831262}
   - component: {fileID: 7041582244709767794}
   - component: {fileID: 1156757214867102710}
+  - component: {fileID: 2180501504579971606}
   m_Layer: 6
   m_Name: Slime
   m_TagString: Enemy
@@ -101,7 +102,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 50
+  m_LinearDrag: 5
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -185,4 +186,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 30
   knockbackStrength: 10
-  blinkDuration: 0.1
+--- !u!114 &2180501504579971606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7538612537514132568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bba0872763bec1b4ebad57565bb7f9e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 1
+  walkDistance: 2
+  pauseDuration: 2
+  player: {fileID: 0}
+  detectionRange: 5
+  attackRange: 2

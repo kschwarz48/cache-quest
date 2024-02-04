@@ -6,24 +6,34 @@ public class EnemyHealth : Health
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     private Animator animator;
-    public float knockbackStrength = 10f;
+
+    private EnemyController enemyController;
+    public float knockbackStrength = 5000f;
     protected override void Awake()
     {
         base.Awake(); // Call the base class Awake method
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        enemyController = GetComponent<EnemyController>(); // Get the EnemyController
         animator.SetBool("isAlive", true);
     }
-    public override void TakeDamage(int damage, Vector2 knockbackDirection)
+     public override void TakeDamage(int damage, Vector2 knockbackDirection)
     {
-        base.TakeDamage(damage); // This updates CurrentHealth in the base class.
+        if (CurrentHealth <= 0) return; // Prevent further damage if already dead
+
+        base.TakeDamage(damage);
         animator.SetTrigger("hit");
         Debug.Log($"Enemy took {damage} damage!");
-        rb.AddForce(knockbackDirection.normalized * knockbackStrength, ForceMode2D.Impulse);
-        Debug.Log($"Current Health: {CurrentHealth}");
 
-        // Check if health depletes and manage death here if not handled in base class.
+        // Apply knockback
+        rb.AddForce(knockbackDirection.normalized * knockbackStrength, ForceMode2D.Impulse);
+        if (enemyController != null)
+        {
+            enemyController.HandleKnockback(); // Tell the enemy controller to handle knockback
+        }
+
+        // Check for death
         if (CurrentHealth <= 0)
         {
             animator.SetBool("isAlive", false);
