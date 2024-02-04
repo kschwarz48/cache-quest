@@ -30,6 +30,9 @@ public class PlayerController : MonoBehaviour
     private float timeSinceLastAttack;
     private float attackSequenceResetTime = 1.0f;
 
+    private bool canMove = true;
+
+
     void Awake()
     {
         if (Instance == null)
@@ -52,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!isRolling)
+        if (!isRolling && canMove)
         {
             Vector2 newMovement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             movement = newMovement;
@@ -64,34 +67,33 @@ public class PlayerController : MonoBehaviour
                 spriteRenderer.flipX = lastMovementDirection.x < 0;
             }
 
-            timeSinceLastAttack += Time.deltaTime;
-
-            if (Input.GetMouseButtonDown(0) && !isRolling && !isAttacking)
-            {
-                if (timeSinceLastAttack > attackSequenceResetTime)
-                {
-                    attackSequence = 0; // Reset the attack sequence if there's a delay
-                }
-
-                StartCoroutine(Attack());
-                timeSinceLastAttack = 0; // Reset time since last attack
-            }
+            // Update simulated speed for animator
+            float simulatedSpeed = movement.sqrMagnitude > 0 ? 0.5f : 0f;
+            animator.SetFloat("Speed", simulatedSpeed);
         }
 
-        // Set the Speed parameter for animation
-        float simulatedSpeed = movement.sqrMagnitude > 0 ? 0.5f : 0f;
-        animator.SetFloat("Speed", simulatedSpeed);
+        // Increment the attack timer outside of the movement check to ensure it's always updated
+        timeSinceLastAttack += Time.deltaTime;
 
-        // Roll and Attack inputs
-        if (Input.GetKeyDown(KeyCode.Space) && !isRolling && movement != Vector2.zero)
+        // Check for Roll input
+        if (Input.GetKeyDown(KeyCode.Space) && !isRolling && canMove && movement != Vector2.zero)
         {
             StartCoroutine(Roll());
         }
-        if (Input.GetMouseButtonDown(0) && !isRolling && !isAttacking && Time.time >= lastAttackTime + attackCooldown)  
+
+        if (Input.GetMouseButtonDown(0) && !isRolling && canMove && !isAttacking && Time.time >= lastAttackTime + attackCooldown)
         {
+            // Reset attack sequence if needed
+            if (timeSinceLastAttack > attackSequenceResetTime)
+            {
+                attackSequence = 0;
+            }
+
             StartCoroutine(Attack());
+            timeSinceLastAttack = 0; // Reset time since last attack
         }
-        }
+    }
+
 
         private IEnumerator Attack()
         {
@@ -120,10 +122,14 @@ public class PlayerController : MonoBehaviour
 
             attackSequence = (attackSequence + 1) % 3;
 
-            yield return new WaitForSeconds(0.5f); // Attack duration
+            yield return new WaitForSeconds(0.5f); // Wait for the attack to finish
 
             DisableAttackHitbox();
             animator.SetBool("isAttacking", false);
+            while (!canMove)
+            {
+                yield return null;
+            }
             isAttacking = false;
         }
 
@@ -171,20 +177,20 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("Enemy") && !hitEnemies.Contains(collision.gameObject))
         {
             EnemyHealth enemyHealth = collision.GetComponent<EnemyHealth>();
-            if (enemyHealth != null)
-            {
-                Debug.Log("Attacked an enemy and dealing damage!");
+   
+            Debug.Log("Attacked an enemy and dealing damage!");
 
-                // Calculate knockback direction
-                Vector2 knockbackDirection = (collision.transform.position - transform.position).normalized;
+            // Calculate knockback direction
+            Vector2 knockbackDirection = (collision.transform.position - transform.position).normalized;
 
-                // Apply damage and knockback
-                enemyHealth.TakeDamage(10, knockbackDirection);
+            // Apply damage and knockback
+            enemyHealth.TakeDamage(10, knockbackDirection);
 
-                hitEnemies.Add(collision.gameObject);
-            }
+            hitEnemies.Add(collision.gameObject);
+            return;
         }
-        else if (collision.CompareTag("Destructible"))
+       
+        if (collision.CompareTag("Destructible"))
         {
             Debug.Log("Hit a destructible object!");
             DestructibleObjectHealth destructibleHealth = collision.GetComponent<DestructibleObjectHealth>();
@@ -216,7 +222,10 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        if (canMove || isRolling) // Allow movement if canMove is true or if the player is rolling
+        {
+            rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        }
     }
 
     void OnDrawGizmos()
@@ -262,5 +271,15 @@ public class PlayerController : MonoBehaviour
                 Gizmos.DrawLine(currentPoint, nextPoint);
             }
         }
+    }
+
+    public void LockMovement()
+    {
+        canMove = false;
+    }
+
+    public void UnlockMovement()
+    {
+        canMove = true;
     }
 }

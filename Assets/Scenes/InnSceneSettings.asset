@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: InnSceneSettings
   m_EditorClassIdentifier: 
   sceneName: InnSceneSettings
-  sceneMusic: {fileID: 8300000, guid: 0634e5d1482dad3428a3dd2b47082d36, type: 3}
+  sceneMusic: {fileID: 8300000, guid: 08e10d81203b7f84a9078a3601dff429, type: 3}

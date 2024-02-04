@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: MainTownSceneSettings
   m_EditorClassIdentifier: 
   sceneName: MainTownSceneSettings
-  sceneMusic: {fileID: 8300000, guid: 526224ef6451ddb4cbfd3c51aa3f3918, type: 3}
+  sceneMusic: {fileID: 8300000, guid: 8cba8a9915c2bbd4dbca7eb4b2910549, type: 3}

@@ -5,58 +5,44 @@ public class EnemyHealth : Health
 {
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
-
+    private Animator animator;
     public float knockbackStrength = 10f;
-    public float blinkDuration = 0.1f;
-    private bool canTakeDamage = true;
-    private float damageCooldown = 1f;
-
     protected override void Awake()
     {
         base.Awake(); // Call the base class Awake method
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        animator.SetBool("isAlive", true);
     }
-
     public override void TakeDamage(int damage, Vector2 knockbackDirection)
     {
-        if (!canTakeDamage) return;
-
-        base.TakeDamage(damage);
-
-        // Check if knockbackDirection is significant
-        Debug.Log($"Knockback Direction: {knockbackDirection}, Force: {knockbackDirection.normalized * knockbackStrength}");
-
+        base.TakeDamage(damage); // This updates CurrentHealth in the base class.
+        animator.SetTrigger("hit");
+        Debug.Log($"Enemy took {damage} damage!");
         rb.AddForce(knockbackDirection.normalized * knockbackStrength, ForceMode2D.Impulse);
+        Debug.Log($"Current Health: {CurrentHealth}");
 
-        // Start the blink coroutine
-        StartCoroutine(BlinkEffect());
-
-        TriggerDamageCooldown(); 
-    }
-
-    private IEnumerator BlinkEffect()
-    {
-        spriteRenderer.color = Color.red;
-        yield return new WaitForSeconds(blinkDuration);
-        spriteRenderer.color = Color.white;
-    }
-
-    private void TriggerDamageCooldown()
-    {
-        canTakeDamage = false;
-        Invoke(nameof(ResetDamageCooldown), damageCooldown);
-    }
-
-    private void ResetDamageCooldown()
-    {
-        canTakeDamage = true;
+        // Check if health depletes and manage death here if not handled in base class.
+        if (CurrentHealth <= 0)
+        {
+            animator.SetBool("isAlive", false);
+            Die();
+        }
     }
 
     protected override void Die()
-    {
+    {   
         base.Die();
         Debug.Log("Enemy died!");
+        // Consider delaying destruction to allow animation to play.
+        StartCoroutine(DestroyAfterDelay(1.0f)); // Example delay.
+    }
+
+    IEnumerator DestroyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         Destroy(gameObject);
     }
+
 }
