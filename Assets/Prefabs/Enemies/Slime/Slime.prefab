@@ -185,7 +185,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 30
-  knockbackStrength: 800
+  invincibilityDuration: 0.5
+  isInvincible: 0
+  enableInvincibility: 1
+  knockbackStrength: 10
 --- !u!114 &2180501504579971606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,6 +204,8 @@ MonoBehaviour:
   moveSpeed: 10
   walkDistance: 2
   pauseDuration: 2
-  player: {fileID: 0}
   detectionRange: 10
   attackRange: 2
+  lungeSpeed: 25
+  lungeTime: 1
+  player: {fileID: 8707608179069307163, guid: 74701e80a4295a24188962550e280506, type: 3}

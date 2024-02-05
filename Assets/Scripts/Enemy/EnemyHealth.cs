@@ -18,20 +18,23 @@ public class EnemyHealth : Health
         enemyController = GetComponent<EnemyController>(); // Get the EnemyController
         animator.SetBool("isAlive", true);
     }
-     public override void TakeDamage(int damage, Vector2 knockbackDirection)
+    public override void TakeDamage(int damage, Vector2 knockbackDirection)
     {
         if (CurrentHealth <= 0) return; // Prevent further damage if already dead
 
         base.TakeDamage(damage);
+        animator.SetBool("isAttacking", false);
         animator.SetTrigger("hit");
         Debug.Log($"Enemy took {damage} damage!");
 
         // Apply knockback
-        rb.AddForce(knockbackDirection.normalized * knockbackStrength, ForceMode2D.Force);
+        rb.AddForce(knockbackDirection.normalized * knockbackStrength, ForceMode2D.Impulse);
         if (enemyController != null)
         {
-            enemyController.HandleKnockback(); // Tell the enemy controller to handle knockback
+            // Tell the enemy controller to handle any knockback-related behavior
+            enemyController.HandleKnockback(knockbackDirection.normalized * knockbackStrength);
         }
+
 
         // Check for death
         if (CurrentHealth <= 0)

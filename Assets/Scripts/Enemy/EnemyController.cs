@@ -7,131 +7,56 @@ public class EnemyController : MonoBehaviour
     {
         Patrolling,
         Chasing,
-        Attacking
+        Attacking,
+        KnockedBack,
+        Dead
     }
 
-    public float moveSpeed = 1f;
+    [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] private float walkDistance = 2f;
+    [SerializeField] private float pauseDuration = 2f;
+    [SerializeField] private float detectionRange = 5f;
+    [SerializeField] private float attackRange = 2f;
+    [SerializeField] private float lungeSpeed = 10f;
+    [SerializeField] private float lungeTime = 0.5f;
+    [SerializeField] private GameObject player;
+
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
-
-    private State currentState;
+    private Vector2 startPosition;
+    private State currentState = State.Patrolling;
     private bool isChaseEnabled = true;
 
-    public float walkDistance = 2f;
-    public float pauseDuration = 2f;
-    private Vector2 startPosition;
-    private Vector2 patrolPoint;
-    public GameObject player;
-    public float detectionRange = 5f;
-    public float attackRange = 2f;
-
-    private bool isKnockedBack = false;
-
-    void Start()
+    void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        player = GameObject.FindGameObjectWithTag("Player");
         startPosition = rb.position;
-        currentState = State.Patrolling;
+    }
+
+    void Start()
+    {
         StartCoroutine(Patrol());
     }
 
     void Update()
     {
-        if (isKnockedBack) return;
-        float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
+        if (currentState == State.Dead) return;
 
+        float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
         switch (currentState)
         {
             case State.Patrolling:
-                if (distanceToPlayer <= detectionRange)
-                {
-                    currentState = State.Chasing;
-                }
-                break;
             case State.Chasing:
-                if (distanceToPlayer <= attackRange)
-                {
-                    StartCoroutine(Attack());
-                }
-                else if (distanceToPlayer > detectionRange)
-                {
-                    currentState = State.Patrolling;
-                }
-                else if (isChaseEnabled)
-                {
-                    MoveTowards(player.transform.position);
-                }
+                UpdateMovementState(distanceToPlayer);
                 break;
-            case State.Attacking:
-                // Attack logic is handled in the Attack coroutine
+            case State.KnockedBack:
+                // Knockback behavior is handled in HandleKnockback
                 break;
         }
-    }
-
-    private IEnumerator Patrol()
-    {
-        while (currentState == State.Patrolling)
-        {
-            patrolPoint = startPosition + Random.insideUnitCircle.normalized * walkDistance;
-
-            yield return MoveTo(patrolPoint, pauseDuration);
-
-            yield return MoveTo(startPosition, pauseDuration);
-        }
-    }
-
-    private IEnumerator MoveTo(Vector2 target, float pauseTime)
-    {
-        while ((rb.position - target).sqrMagnitude > 0.01f)
-        {
-            MoveTowards(target);
-            yield return null;
-        }
-
-        yield return new WaitForSeconds(pauseTime);
-    }
-
-    private void MoveTowards(Vector2 targetPosition)
-    {
-        rb.MovePosition(Vector2.MoveTowards(rb.position, targetPosition, moveSpeed * Time.deltaTime));
-        FlipSprite(targetPosition - rb.position);
-    }
-
-    private void FlipSprite(Vector2 direction)
-    {
-        if (direction.x < 0)
-            spriteRenderer.flipX = false;
-        else if (direction.x > 0)
-            spriteRenderer.flipX = true;
-    }
-
-    private IEnumerator Attack()
-    {
-        currentState = State.Attacking;
-        isChaseEnabled = false;
-        animator.SetBool("isAttacking", true);
-
-        // Lunge towards the player's position
-        Vector2 originalPosition = transform.position;
-        Vector2 targetPosition = player.transform.position;
-        float lungeTime = 0.5f;
-
-        float startTime = Time.time;
-        while (Time.time < startTime + lungeTime)
-        {
-            transform.position = Vector2.Lerp(originalPosition, targetPosition, (Time.time - startTime) / lungeTime);
-            yield return null;
-        }
-
-        yield return new WaitForSeconds(1f); // Pause after attack
-
-        isChaseEnabled = true;
-        currentState = State.Chasing;
-        animator.SetBool("isAttacking", false);
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -143,21 +68,128 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void HandleKnockback()
+
+    private void UpdateMovementState(float distanceToPlayer)
     {
-        // Handle knockback logic here, for example:
-        isKnockedBack = true; // Set the flag to true
-        StopAllCoroutines(); // Stop all other actions like patrolling, chasing, etc.
-        StartCoroutine(KnockbackCoroutine()); // Start knockback recovery routine
+        if (distanceToPlayer <= detectionRange)
+        {
+            if (currentState != State.Chasing && currentState != State.Attacking)
+            {
+                ChangeState(State.Chasing);
+            }
+
+            if (distanceToPlayer <= attackRange && currentState != State.Attacking)
+            {
+                StartCoroutine(Attack());
+            }
+            else
+            {
+                MoveTowards(player.transform.position);
+            }
+        }
+        else
+        {
+            if (currentState != State.Patrolling)
+            {
+                ChangeState(State.Patrolling);
+            }
+        }
     }
 
-    private IEnumerator KnockbackCoroutine()
+    private IEnumerator Patrol()
     {
-        yield return new WaitForSeconds(0.5f); // Duration of knockback effect
-        isKnockedBack = false; // Reset the flag after knockback duration
-        // Resume normal behavior, for example, start patrolling again
-        currentState = State.Patrolling;
-        StartCoroutine(Patrol());
+        ChangeState(State.Patrolling);
+        while (currentState == State.Patrolling)
+        {
+            Vector2 patrolPoint = startPosition + Random.insideUnitCircle.normalized * walkDistance;
+            yield return MoveTo(patrolPoint, pauseDuration);
+            yield return MoveTo(startPosition, pauseDuration);
+        }
     }
 
+    private IEnumerator MoveTo(Vector2 target, float pauseTime)
+    {
+        while ((rb.position - target).sqrMagnitude > 0.01f)
+        {
+            MoveTowards(target);
+            yield return null;
+        }
+        yield return new WaitForSeconds(pauseTime);
+    }
+
+    private void MoveTowards(Vector2 targetPosition)
+    {
+        if (currentState == State.Chasing || currentState == State.Patrolling)
+        {
+            animator.SetBool("isMoving", true);
+            rb.MovePosition(Vector2.MoveTowards(rb.position, targetPosition, moveSpeed * Time.deltaTime));
+        }
+        else
+        {
+            animator.SetBool("isMoving", false);
+        }
+        FlipSprite(targetPosition - rb.position);
+    }
+
+    private IEnumerator Attack()
+    {
+        ChangeState(State.Attacking);
+        Vector2 direction = (player.transform.position - transform.position).normalized;
+        rb.velocity = direction * lungeSpeed;
+        yield return new WaitForSeconds(lungeTime);
+        ChangeState(State.Chasing);
+    }
+
+    public void HandleKnockback(Vector2 knockbackForce)
+    {
+        ChangeState(State.KnockedBack);
+        rb.velocity = knockbackForce; // Apply knockback force
+        StartCoroutine(KnockbackRecovery());
+    }
+
+    private IEnumerator KnockbackRecovery()
+    {
+        yield return new WaitForSeconds(0.5f); // Adjust this duration as needed
+        if (currentState != State.Dead)
+        {
+            ChangeState(State.Patrolling);
+        }
+    }
+
+    public void Die()
+    {
+        ChangeState(State.Dead);
+        animator.SetBool("isAlive", false);
+        rb.velocity = Vector2.zero;
+        rb.isKinematic = true; // Prevent further physics interactions
+        this.enabled = false; // Optionally disable this script to stop all behavior
+    }
+
+    private void FlipSprite(Vector2 direction)
+    {
+        spriteRenderer.flipX = direction.x < 0;
+    }
+
+    private void ChangeState(State newState)
+    {
+        currentState = newState;
+        switch (currentState)
+        {
+            case State.Patrolling:
+            case State.Chasing:
+                animator.SetBool("isMoving", true);
+                break;
+            case State.Attacking:
+                animator.SetBool("isAttacking", true);
+                animator.SetBool("isMoving", false);
+                break;
+            case State.KnockedBack:
+                animator.SetBool("isMoving", false);
+                break;
+            case State.Dead:
+                animator.SetBool("isMoving", false);
+                animator.SetBool("isAttacking", false);
+                break;
+        }
+    }
 }
