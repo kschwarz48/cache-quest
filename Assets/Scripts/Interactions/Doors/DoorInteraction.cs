@@ -14,6 +14,10 @@ public class DoorInteraction : MonoBehaviour, IInteractable
     private bool isPlayerClose = false;
     private bool isPlayerInSafeZone = false;
 
+    private bool hasInteracted = false;
+    private float interactionCooldown = 0.5f;
+    private float lastInteractionTime = -1f;
+
     void OnMouseEnter()
     {
         if (cursorTexture != null)
@@ -29,9 +33,13 @@ public class DoorInteraction : MonoBehaviour, IInteractable
 
     void Update()
     {
-        if (isPlayerClose && (Input.GetKeyDown(KeyCode.E)|| Input.GetMouseButtonDown(1)))
+        if (isPlayerClose && Time.time >= lastInteractionTime + interactionCooldown)
         {
-            Interact();
+            if ((Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(1)) && !hasInteracted)
+            {
+                Interact();
+                hasInteracted = true; // Prevent further interaction until reset
+            }
         }
     }
 
@@ -40,21 +48,19 @@ public class DoorInteraction : MonoBehaviour, IInteractable
         if (other.CompareTag("Player"))
         {
             isPlayerClose = true;
-            if (isAutomaticExit && !isPlayerInSafeZone)
+            if (isAutomaticExit && !isPlayerInSafeZone && !hasInteracted)
             {
                 PlayDoorSound();
                 AudioManager.Instance.ChangeMusic(settings.sceneMusic); 
-                // Start loading the scene after the door sound has had time to play
                 StartCoroutine(DelayedSceneLoad(doorSound.length));
+                hasInteracted = true; // Prevent further automatic interaction
             }
             else
             {
-                // For non-automatic exits, player needs to interact to trigger the sound and scene transition
                 other.GetComponent<PlayerInteraction>().SetCurrentInteractable(gameObject);
             }
         }
     }
-
     public void Interact()
     {
         Debug.Log("Interact called for door leading to " + sceneToLoad);
@@ -76,6 +82,7 @@ public class DoorInteraction : MonoBehaviour, IInteractable
         if (other.CompareTag("Player"))
         {
             isPlayerClose = false;
+            hasInteracted = false; // Reset on exit to allow for re-entry interactions
             if (!isAutomaticExit)
             {
                 other.GetComponent<PlayerInteraction>().ClearCurrentInteractable(gameObject);

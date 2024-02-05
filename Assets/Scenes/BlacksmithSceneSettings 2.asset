@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BlacksmithSceneSettings 2
   m_EditorClassIdentifier: 
   sceneName: BlacksmithSceneSettings
-  sceneMusic: {fileID: 8300000, guid: 83f95142dc9196745b22c87a9fa91896, type: 3}
+  sceneMusic: {fileID: 8300000, guid: b88f5d4980503814e870c976dcfe621d, type: 3}

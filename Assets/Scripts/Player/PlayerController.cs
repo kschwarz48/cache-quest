@@ -29,6 +29,10 @@ public class PlayerController : MonoBehaviour
     private float timeSinceLastAttack;
     private float attackSequenceResetTime = 1.0f;
 
+    public AudioClip attackSound1;
+    public AudioClip attackSound2;
+    public AudioClip attackSound3;
+
     public float maxSpeed = 3.5f;
 
     private bool canMove = true;
@@ -113,12 +117,15 @@ public class PlayerController : MonoBehaviour
             {
                 case 0:
                     animator.SetTrigger("Attack1");
+                    AudioManager.Instance.PlaySoundEffect(attackSound1);
                     break;
                 case 1:
                     animator.SetTrigger("Attack2");
+                    AudioManager.Instance.PlaySoundEffect(attackSound2);
                     break;
                 case 2:
                     animator.SetTrigger("Attack3");
+                    AudioManager.Instance.PlaySoundEffect(attackSound3);
                     break;
             }
 

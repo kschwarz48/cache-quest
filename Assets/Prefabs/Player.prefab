@@ -636,6 +636,9 @@ MonoBehaviour:
   moveSpeed: 2000
   rollSpeedMultiplier: 2.25
   rollDuration: 0.4
+  attackSound1: {fileID: 8300000, guid: 8c60c8d5945657247afbcfbfd498f78e, type: 3}
+  attackSound2: {fileID: 8300000, guid: 33c238501c1cb1b4d91eccc04fe4dcda, type: 3}
+  attackSound3: {fileID: 8300000, guid: c4c038198554f8a479785eca095df72f, type: 3}
   maxSpeed: 5
   idleFriction: 0.9
 --- !u!114 &4449756163453940879
