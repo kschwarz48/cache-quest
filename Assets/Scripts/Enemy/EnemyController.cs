@@ -113,6 +113,7 @@ public class EnemyController : MonoBehaviour
     {
         currentState = State.Attacking;
         isChaseEnabled = false;
+        animator.SetBool("isAttacking", true);
 
         // Lunge towards the player's position
         Vector2 originalPosition = transform.position;
@@ -130,6 +131,7 @@ public class EnemyController : MonoBehaviour
 
         isChaseEnabled = true;
         currentState = State.Chasing;
+        animator.SetBool("isAttacking", false);
     }
 
     public void OnCollisionEnter2D(Collision2D collision)

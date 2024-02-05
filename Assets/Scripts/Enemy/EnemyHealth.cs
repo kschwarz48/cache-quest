@@ -37,6 +37,7 @@ public class EnemyHealth : Health
         if (CurrentHealth <= 0)
         {
             animator.SetBool("isAlive", false);
+            animator.SetBool("isAttacking", false);
             Die();
         }
     }
