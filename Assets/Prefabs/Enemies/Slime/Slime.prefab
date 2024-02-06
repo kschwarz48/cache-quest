@@ -203,7 +203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   walkDistance: 2
-  pauseDuration: 2
+  pauseDuration: 1
   detectionRange: 10
   attackRange: 2
   lungeSpeed: 25

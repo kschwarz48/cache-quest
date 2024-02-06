@@ -20,7 +20,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float lungeSpeed = 10f;
     [SerializeField] private float lungeTime = 0.5f;
     [SerializeField] private GameObject player;
-
+    [SerializeField] private float attackCooldown = 2f; // Time between attacks
+    private float lastAttackTime = -999f;
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
@@ -68,6 +69,7 @@ public class EnemyController : MonoBehaviour
     }
 
 
+    // Inside UpdateMovementState, adjust to include attack cooldown check
     private void UpdateMovementState(float distanceToPlayer)
     {
         if (distanceToPlayer <= detectionRange)
@@ -77,11 +79,12 @@ public class EnemyController : MonoBehaviour
                 ChangeState(State.Chasing);
             }
 
-            if (distanceToPlayer <= attackRange && currentState != State.Attacking)
+            // Check if enough time has passed since the last attack
+            if (distanceToPlayer <= attackRange && currentState != State.Attacking && Time.time > lastAttackTime + attackCooldown)
             {
                 StartCoroutine(Attack());
             }
-            else
+            else if (currentState != State.Attacking)
             {
                 MoveTowards(player.transform.position);
             }
@@ -132,10 +135,19 @@ public class EnemyController : MonoBehaviour
 
     private IEnumerator Attack()
     {
+        lastAttackTime = Time.time; // Record the time of attack
         ChangeState(State.Attacking);
+
+        // Modify direction calculation to add unpredictability or prediction
         Vector2 direction = (player.transform.position - transform.position).normalized;
-        rb.velocity = direction * lungeSpeed;
+
+        // Optionally, adjust lunge speed or time based on player distance
+        float currentLungeSpeed = lungeSpeed; // Could be adjusted dynamically
+
+        rb.velocity = direction * currentLungeSpeed;
         yield return new WaitForSeconds(lungeTime);
+
+        // After lunge, return to chasing or another state based on context
         ChangeState(State.Chasing);
     }
 
