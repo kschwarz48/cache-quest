@@ -39,6 +39,8 @@ public class PlayerController : MonoBehaviour
 
     public float idleFriction = 0.9f;
 
+    public static bool isGamePaused = false;
+
     void Awake()
     {
         if (Instance == null)
@@ -60,7 +62,8 @@ public class PlayerController : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
+        if (isGamePaused) return;
         if (!isRolling && canMove)
         {
             Vector2 newMovement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));

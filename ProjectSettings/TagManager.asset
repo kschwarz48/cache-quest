@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Destructible
   - PlayerHUD
+  - InGameMenu
   layers:
   - Default
   - TransparentFX

@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
 
     public GameObject playerPrefab;
 
-
     void Awake()
     {
         if (Instance == null)
