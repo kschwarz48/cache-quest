@@ -26,7 +26,6 @@ public class EnemyController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Vector2 startPosition;
     private State currentState = State.Patrolling;
-    private bool isChaseEnabled = true;
 
     void Awake()
     {
