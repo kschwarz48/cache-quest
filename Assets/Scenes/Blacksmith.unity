@@ -179,6 +179,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5170978243809425612, guid: c404556e5618f86489f43a4ae5f2a048, type: 3}
+      propertyPath: doorSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 30feb4224749e6045b536f3a271d53b7, type: 3}
     - target: {fileID: 7383980679100992605, guid: c404556e5618f86489f43a4ae5f2a048, type: 3}
       propertyPath: m_Name
       value: BlacksmithInterior

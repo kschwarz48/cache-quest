@@ -171,6 +171,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 458457426199862743, guid: 880a7c474161b2548bd880e238701693, type: 3}
+      propertyPath: doorSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 30feb4224749e6045b536f3a271d53b7, type: 3}
     - target: {fileID: 2875247677001001286, guid: 880a7c474161b2548bd880e238701693, type: 3}
       propertyPath: m_Name
       value: InnInterior
