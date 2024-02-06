@@ -5,7 +5,7 @@ using System.Collections;
 public class Health : MonoBehaviour
 {
     [SerializeField]
-    private int maxHealth = 100;
+    private int maxHealth = 200;
     private int currentHealth;
 
     [SerializeField]
@@ -63,6 +63,6 @@ public class Health : MonoBehaviour
     public void ResetHealth()
     {
         currentHealth = maxHealth;
-        OnHealthChanged?.Invoke(currentHealth);
+        OnHealthChanged?.Invoke(maxHealth);
     }
 }

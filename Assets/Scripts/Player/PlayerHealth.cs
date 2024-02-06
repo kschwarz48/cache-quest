@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class PlayerHealth : Health
 {
@@ -8,8 +9,8 @@ public class PlayerHealth : Health
     private Rigidbody2D rb;
     private Animator animator;
     public float knockbackStrength = 5000f;
-
     private SpriteRenderer spriteRenderer;
+    public static event Action<float> OnHealthChanged;
 
     protected override void Awake()
     {
@@ -25,7 +26,12 @@ public class PlayerHealth : Health
     public override void TakeDamage(int damage, Vector2 knockbackDirection = default)
     {
         if (!isAlive || isInvincible) return; 
+
         base.TakeDamage(damage); 
+
+        // Broadcast the health change
+        float healthPercentage = (float)CurrentHealth / MaxHealth;
+        OnHealthChanged?.Invoke(healthPercentage); 
         Debug.Log($"Player took {damage} damage! Current Health: {CurrentHealth}");
 
         if (CurrentHealth <= 0)
@@ -64,6 +70,8 @@ public class PlayerHealth : Health
     void RespawnPlayer()
     {
         base.ResetHealth();
+        float healthPercentage = (float)CurrentHealth / MaxHealth;
+        OnHealthChanged?.Invoke(healthPercentage);
         GameManager.Instance.RespawnPlayerAtSpawnPoint("InitalSpawnPoint");
         animator.SetBool("isAlive", true);
         animator.Play("Player_Idle"); 
